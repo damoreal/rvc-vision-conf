@@ -6,8 +6,7 @@ const Schedule = () => {
       day: "Day 1",
       date: "December 10, 2025",
       sessions: [
-        { time: "9:00 AM", title: "Opening Ceremony & Worship", type: "Morning Session" },
-        { time: "4:00 PM", title: "Foundations of Heaven on Earth", type: "Evening Session" },
+        { time: "4:00 PM", title: "Opening Ceremony & Worship", type: "Evening Session" },
       ],
     },
     {
@@ -38,8 +37,7 @@ const Schedule = () => {
       day: "Day 5",
       date: "December 14, 2025",
       sessions: [
-        { time: "9:00 AM", title: "Commissioning Service", type: "Morning Session" },
-        { time: "4:00 PM", title: "Grand Finale & Impartation", type: "Evening Session" },
+        { time: "9:00 AM", title: "Grand Finale & Commissioning Service", type: "Morning Session" },
       ],
     },
   ];

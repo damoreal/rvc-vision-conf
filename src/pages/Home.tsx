@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import EventPhotos from "@/components/EventPhotos";
 import About from "@/components/About";
 import Schedule from "@/components/Schedule";
 import Speakers from "@/components/Speakers";
@@ -11,6 +12,7 @@ const Home = () => {
     <div className="min-h-screen">
       <Header />
       <Hero />
+      <EventPhotos />
       <About />
       <Schedule />
       <Speakers />

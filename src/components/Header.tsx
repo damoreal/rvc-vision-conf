@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import rvcLogo from "@/assets/rvc-logo.png";
+import godhouseLogo from "@/assets/godhouse-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,6 +34,11 @@ const Header = () => {
               <div className="text-xs text-muted-foreground">Running with the Vision</div>
             </div>
           </Link>
+
+          {/* Desktop Godhouse Logo */}
+          <div className="hidden lg:flex items-center gap-2 absolute left-1/2 -translate-x-1/2">
+            <img src={godhouseLogo} alt="The Godhouse Centre" className="h-10 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">

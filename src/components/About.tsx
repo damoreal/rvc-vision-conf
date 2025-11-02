@@ -1,5 +1,3 @@
-import godhouseLogo from "@/assets/godhouse-logo.png";
-
 const About = () => {
   return (
     <section id="about" className="py-20 bg-gradient-section">
@@ -31,9 +29,6 @@ const About = () => {
             </div>
           </div>
 
-          <div className="mt-12 flex justify-center">
-            <img src={godhouseLogo} alt="The Godhouse Centre" className="h-16 w-auto" />
-          </div>
         </div>
       </div>
     </section>
