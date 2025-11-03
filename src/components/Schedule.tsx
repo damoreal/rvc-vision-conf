@@ -1,4 +1,6 @@
 import { Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Schedule = () => {
   const schedule = [
@@ -10,27 +12,11 @@ const Schedule = () => {
       ],
     },
     {
-      day: "Day 2",
-      date: "December 11, 2025",
+      day: "Day 2 - 4",
+      date: "December 11 - 13, 2025",
       sessions: [
-        { time: "9:00 AM", title: "Kingdom Principles & Power", type: "Morning Session" },
-        { time: "4:00 PM", title: "Divine Encounters", type: "Evening Session" },
-      ],
-    },
-    {
-      day: "Day 3",
-      date: "December 12, 2025",
-      sessions: [
-        { time: "9:00 AM", title: "Transformation Through the Word", type: "Morning Session" },
-        { time: "4:00 PM", title: "Supernatural Living", type: "Evening Session" },
-      ],
-    },
-    {
-      day: "Day 4",
-      date: "December 13, 2025",
-      sessions: [
-        { time: "9:00 AM", title: "Walking in Divine Authority", type: "Morning Session" },
-        { time: "4:00 PM", title: "Breakthrough & Miracles", type: "Evening Session" },
+        { time: "9:00 AM", title: "Morning Session", type: "Morning" },
+        { time: "4:00 PM", title: "Evening Session", type: "Evening" },
       ],
     },
     {
@@ -62,7 +48,7 @@ const Schedule = () => {
               className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow"
             >
               <div className="flex items-center gap-3 mb-4">
-                <Calendar className="w-6 h-6 text-primary" />
+                <Calendar className="w-6 h-6 text-primary animate-pulse" />
                 <div>
                   <h3 className="text-xl font-bold text-foreground">{day.day}</h3>
                   <p className="text-sm text-muted-foreground">{day.date}</p>
@@ -86,6 +72,14 @@ const Schedule = () => {
               </div>
             </div>
           ))}
+        </div>
+        
+        <div className="text-center mt-12">
+          <Link to="/registration">
+            <Button size="lg" className="bg-gradient-hero text-primary-foreground hover:opacity-90 text-lg px-8 py-6">
+              Register Now
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
