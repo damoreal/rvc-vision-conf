@@ -12,21 +12,11 @@ const Home = () => {
     <div className="min-h-screen">
       <Header />
       <Hero />
-      <div className="animate-fade-in">
-        <EventPhotos />
-      </div>
-      <div className="animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
-        <About />
-      </div>
-      <div className="animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
-        <Schedule />
-      </div>
-      <div className="animate-fade-in" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-        <Speakers />
-      </div>
-      <div className="animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
-        <FAQs />
-      </div>
+      <EventPhotos />
+      <About />
+      <Schedule />
+      <Speakers />
+      <FAQs />
       <Footer />
     </div>
   );

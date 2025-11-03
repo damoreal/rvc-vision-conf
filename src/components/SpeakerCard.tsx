@@ -25,7 +25,7 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
   return (
     <>
       <div
-        className="relative h-[450px] cursor-pointer perspective-1000"
+        className="relative h-80 cursor-pointer perspective-1000"
         onMouseEnter={() => setIsFlipped(true)}
         onMouseLeave={() => setIsFlipped(false)}
       >
@@ -39,7 +39,7 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
             <img
               src={speaker.photo}
               alt={speaker.name}
-              className="w-full h-72 object-cover"
+              className="w-full h-48 object-cover"
             />
             <div className="p-6">
               <h3 className="text-xl font-bold text-foreground mb-2">{speaker.name}</h3>
