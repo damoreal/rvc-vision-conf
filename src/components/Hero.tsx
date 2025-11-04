@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Calendar, MapPin, Clock } from "lucide-react";
+import Countdown from "@/components/Countdown";
 
 const Hero = () => {
   return (
@@ -39,9 +40,12 @@ const Hero = () => {
           </h1>
 
           {/* Tagline */}
-          <p className="text-xl md:text-2xl text-primary-foreground/80 mb-12 max-w-3xl mx-auto font-light animate-fade-in italic">
+          <p className="text-xl md:text-2xl text-primary-foreground/80 mb-8 max-w-3xl mx-auto font-light animate-fade-in italic">
             Experience divine transformation as we explore bringing Heaven's reality into our everyday lives
           </p>
+
+          {/* Countdown */}
+          <Countdown />
 
           {/* Event Details */}
           <div className="flex flex-wrap justify-center gap-6 mb-12 text-primary-foreground/90 animate-fade-in">
