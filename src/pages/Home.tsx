@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import EventPhotos from "@/components/EventPhotos";
 import About from "@/components/About";
+import Countdown from "@/components/Countdown";
 import Schedule from "@/components/Schedule";
 import Speakers from "@/components/Speakers";
 import FAQs from "@/components/FAQs";
@@ -20,6 +21,9 @@ const Home = () => {
       </div>
       <div className="scroll-fade-in">
         <About />
+      </div>
+      <div className="scroll-fade-in">
+        <Countdown />
       </div>
       <div className="scroll-fade-in">
         <Schedule />
