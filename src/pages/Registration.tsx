@@ -30,9 +30,23 @@ const formSchema = z.object({
   lastName: z.string().min(2, "Last name must be at least 2 characters").max(50),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  church: z.string().optional(),
-  attendanceType: z.enum(["full", "morning", "evening"]),
+  city: z.string().min(2, "City/Location is required").max(100),
+  churchType: z.enum(["Godhouse", "Others"]),
+  godhouseCentre: z.string().optional(),
+  otherChurch: z.string().optional(),
+  attendanceType: z.enum(["Physical", "Virtual"]),
   accommodation: z.enum(["yes", "no"]),
+}).refine((data) => {
+  if (data.churchType === "Godhouse") {
+    return !!data.godhouseCentre;
+  }
+  if (data.churchType === "Others") {
+    return !!data.otherChurch;
+  }
+  return true;
+}, {
+  message: "Please select your centre or enter your church name",
+  path: ["churchType"],
 });
 
 const Registration = () => {
@@ -46,11 +60,16 @@ const Registration = () => {
       lastName: "",
       email: "",
       phone: "",
-      church: "",
-      attendanceType: "full",
+      city: "",
+      churchType: "Godhouse",
+      godhouseCentre: "",
+      otherChurch: "",
+      attendanceType: "Physical",
       accommodation: "no",
     },
   });
+
+  const watchChurchType = form.watch("churchType");
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
@@ -167,17 +186,89 @@ const Registration = () => {
 
                 <FormField
                   control={form.control}
-                  name="church"
+                  name="city"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Church (Optional)</FormLabel>
+                      <FormLabel>City/Location *</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your church name" {...field} />
+                        <Input placeholder="e.g., Lagos, Abuja" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
+                <FormField
+                  control={form.control}
+                  name="churchType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Church *</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select church" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Godhouse">Godhouse</SelectItem>
+                          <SelectItem value="Others">Others</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {watchChurchType === "Godhouse" && (
+                  <FormField
+                    control={form.control}
+                    name="godhouseCentre"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Select Your Centre/Branch *</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select your centre" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="Warri">Warri</SelectItem>
+                            <SelectItem value="Lagos">Lagos</SelectItem>
+                            <SelectItem value="Portharcourt">Portharcourt</SelectItem>
+                            <SelectItem value="Abuja">Abuja</SelectItem>
+                            <SelectItem value="Ibadan">Ibadan</SelectItem>
+                            <SelectItem value="Sagamu">Sagamu</SelectItem>
+                            <SelectItem value="Jeddo">Jeddo</SelectItem>
+                            <SelectItem value="Asaba">Asaba</SelectItem>
+                            <SelectItem value="Bonny Island">Bonny Island</SelectItem>
+                            <SelectItem value="Ecclesia USA">Ecclesia USA</SelectItem>
+                            <SelectItem value="Ecclesia UK">Ecclesia UK</SelectItem>
+                            <SelectItem value="Ecclesia Canada">Ecclesia Canada</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+
+                {watchChurchType === "Others" && (
+                  <FormField
+                    control={form.control}
+                    name="otherChurch"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Church Name *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your church name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
 
                 <FormField
                   control={form.control}
@@ -192,9 +283,8 @@ const Registration = () => {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="full">Full Conference (All Sessions)</SelectItem>
-                          <SelectItem value="morning">Morning Sessions Only</SelectItem>
-                          <SelectItem value="evening">Evening Sessions Only</SelectItem>
+                          <SelectItem value="Physical">Physical</SelectItem>
+                          <SelectItem value="Virtual">Virtual</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
