@@ -64,7 +64,7 @@ const Countdown = () => {
             <div className="h-px w-12 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-foreground mb-3">
-            Countdown to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-gold">Heaven on Earth</span>
+            Countdown to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-gold">RVC 2025</span>
           </h2>
           <p className="text-lg text-muted-foreground font-light italic max-w-2xl mx-auto">
             The transformation begins soon. Are you ready?
