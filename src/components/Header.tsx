@@ -9,10 +9,18 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
+  const scrollToFAQs = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const faqSection = document.getElementById('faqs');
+    if (faqSection) {
+      faqSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Registration", path: "/registration" },
-    { name: "FAQs", path: "/#faqs" },
+    { name: "FAQs", path: "/#faqs", onClick: scrollToFAQs },
     { name: "Image Gallery", path: "/gallery" },
   ];
 
@@ -46,6 +54,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.path}
+                onClick={item.onClick}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   isActive(item.path) ? "text-primary" : "text-foreground"
                 }`}
@@ -76,7 +85,10 @@ const Header = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    setIsMenuOpen(false);
+                    if (item.onClick) item.onClick(e);
+                  }}
                   className={`text-sm font-medium transition-colors hover:text-primary ${
                     isActive(item.path) ? "text-primary" : "text-foreground"
                   }`}
