@@ -1,82 +1,154 @@
+import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Calendar, MapPin, Clock } from "lucide-react";
+import { Calendar, MapPin, Clock, Sparkles, ChevronDown } from "lucide-react";
+import flyerAsset from "@/assets/rvc2026-flyer.jpg.asset.json";
+
+interface Ember {
+  left: string;
+  bottom: string;
+  size: number;
+  duration: number;
+  delay: number;
+  driftX: string;
+}
 
 const Hero = () => {
+  const embers = useMemo<Ember[]>(
+    () =>
+      Array.from({ length: 14 }, (_, i) => ({
+        left: `${(i * 37) % 100}%`,
+        bottom: `${(i * 53) % 40 - 10}%`,
+        size: 3 + ((i * 7) % 6),
+        duration: 9 + ((i * 13) % 8),
+        delay: (i * 1.3) % 9,
+        driftX: `${((i * 29) % 60) - 30}px`,
+      })),
+    []
+  );
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero pt-20">
-      {/* Enhanced Decorative elements */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-gold rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-primary rounded-full blur-2xl animate-pulse delay-500"></div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-ink pt-24">
+      {/* Flyer artwork backdrop */}
+      <div className="absolute inset-0">
+        <img
+          src={flyerAsset.url}
+          alt="RVC 2026 Manifestation"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Cinematic scrims so the wordmark and content stay legible */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(170,45%,6%,0.82)_0%,hsl(170,45%,6%,0.55)_38%,hsl(170,45%,7%,0.88)_78%,hsl(170,45%,7%,0.98)_100%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(170,45%,5%,0.55)_100%)]"></div>
       </div>
 
-      {/* Floating particles */}
+      {/* Floating embers */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-gold rounded-full animate-ping opacity-30"></div>
-        <div className="absolute top-3/4 right-1/3 w-3 h-3 bg-accent rounded-full animate-ping opacity-40 delay-700"></div>
-        <div className="absolute bottom-1/3 left-2/3 w-2 h-2 bg-primary rounded-full animate-ping opacity-30 delay-300"></div>
+        {embers.map((e, i) => (
+          <div
+            key={i}
+            className="ember"
+            style={{
+              left: e.left,
+              bottom: e.bottom,
+              width: e.size,
+              height: e.size,
+              animationDuration: `${e.duration}s`,
+              animationDelay: `${e.delay}s`,
+              ["--drift-x" as string]: e.driftX,
+            }}
+          ></div>
+        ))}
       </div>
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
-        <div className="text-center max-w-5xl mx-auto">
-          {/* Conference Title */}
-          <div className="mb-6 animate-fade-in">
-            <p className="text-primary-foreground/80 text-sm md:text-base font-heading font-bold mb-2 tracking-[0.2em] uppercase">
-              Running with the Vision Conference
+      {/* Ambient glow blooms */}
+      <div className="absolute -top-24 left-1/4 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl breathe-gold pointer-events-none"></div>
+      <div className="absolute bottom-10 right-1/5 w-80 h-80 rounded-full bg-gold/10 blur-3xl breathe-gold pointer-events-none"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center max-w-6xl mx-auto">
+          {/* Kicker */}
+          <div className="intro-reveal flex items-center justify-center gap-4 mb-6" style={{ animationDelay: "0.15s" }}>
+            <span className="hidden sm:block h-px w-16 bg-gradient-to-r from-transparent to-gold/70"></span>
+            <p className="text-gold text-[11px] md:text-sm font-heading font-bold tracking-[0.35em] uppercase text-glow-gold">
+              Running with the Vision Conference &middot; 2026
             </p>
-            <p className="text-gold text-2xl md:text-3xl font-heading font-black tracking-wider">
-              2025
-            </p>
+            <span className="hidden sm:block h-px w-16 bg-gradient-to-l from-transparent to-gold/70"></span>
           </div>
 
-          {/* Main Theme */}
-          <h1 className="text-7xl md:text-8xl lg:text-[10rem] font-display font-black text-primary-foreground mb-8 leading-[0.9] tracking-tight animate-scale-in" style={{ textShadow: '0 0 40px rgba(255, 215, 0, 0.3), 0 0 80px rgba(138, 43, 226, 0.2)' }}>
-            HEAVEN
-            <br />
-            <span className="text-gold">ON EARTH</span>
+          {/* The wordmark — two staggered lines like the flyer */}
+          <h1 className="font-display leading-[0.82] tracking-tight text-white select-none">
+            <span className="block intro-reveal text-[19vw] md:text-[13vw] lg:text-[11rem] text-glow-soft" style={{ animationDelay: "0.35s" }}>
+              MANIFES
+            </span>
+            <span className="block intro-reveal text-[19vw] md:text-[13vw] lg:text-[11rem] md:ml-[14%] shimmer-gold bg-clip-text text-transparent text-glow-gold" style={{ animationDelay: "0.55s" }}>
+              TATION
+            </span>
           </h1>
 
           {/* Tagline */}
-          <p className="text-xl md:text-2xl text-primary-foreground/80 mb-12 max-w-3xl mx-auto font-light animate-fade-in italic">
-            Experience divine transformation as we explore bringing Heaven's reality into our everyday lives
+          <p
+            className="intro-reveal mt-8 text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-serif italic leading-relaxed"
+            style={{ animationDelay: "0.8s" }}
+          >
+            Spirit-inspired teachings and impartation — empowering believers for
+            the work of ministry, until Heaven's reality is made visible.
           </p>
 
-          {/* Event Details */}
-          <div className="flex flex-wrap justify-center gap-6 mb-12 text-primary-foreground/90 animate-fade-in">
-            <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm px-4 py-2 rounded-full border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all">
-              <Calendar className="w-5 h-5 text-gold" />
-              <span className="font-medium">10th - 14th December, 2025</span>
+          {/* Event detail pills */}
+          <div
+            className="intro-reveal flex flex-wrap justify-center gap-3 md:gap-4 mt-10"
+            style={{ animationDelay: "1s" }}
+          >
+            <div className="glass-light px-4 py-2 rounded-full flex items-center gap-2 text-white text-sm font-medium">
+              <Calendar className="w-4 h-4 text-gold" />
+              9th – 13th December, 2026
             </div>
-            <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm px-4 py-2 rounded-full border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all">
-              <Clock className="w-5 h-5 text-gold" />
-              <span className="font-medium">9am & 4pm WAT</span>
+            <div className="glass-light px-4 py-2 rounded-full flex items-center gap-2 text-white text-sm font-medium">
+              <Clock className="w-4 h-4 text-gold" />
+              9am &amp; 4pm WAT
             </div>
-            <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm px-4 py-2 rounded-full border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all">
-              <MapPin className="w-5 h-5 text-gold" />
-              <span className="font-medium">The Godhouse Centre, Warri</span>
+            <div className="glass-light px-4 py-2 rounded-full flex items-center gap-2 text-white text-sm font-medium">
+              <MapPin className="w-4 h-4 text-gold" />
+              The Godhouse Centre, Warri
+            </div>
+            <div className="glass-light px-4 py-2 rounded-full flex items-center gap-2 text-white text-sm font-medium">
+              <Sparkles className="w-4 h-4 text-gold" />
+              Streamed Live &middot; Wholeword TV &middot; YouTube &middot; Facebook
             </div>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-            <Button asChild size="lg" className="bg-gold text-gold-foreground hover:bg-gold/90 hover:scale-105 text-lg px-8 py-6 font-bold transition-all shadow-lg hover:shadow-gold/50">
+          {/* CTAs */}
+          <div
+            className="intro-reveal flex flex-col sm:flex-row gap-4 justify-center mt-12"
+            style={{ animationDelay: "1.15s" }}
+          >
+            <Button
+              asChild
+              size="lg"
+              className="rounded-full bg-gold text-gold-foreground hover:bg-gold-light font-heading font-bold text-lg px-10 py-6 shadow-gold hover:scale-105 transition-all"
+            >
               <Link to="/registration">Register Now</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="bg-primary-foreground/10 text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/20 hover:scale-105 text-lg px-8 py-6 backdrop-blur-sm transition-all">
-              <a href="#about">Learn More</a>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="rounded-full glass-light text-white border-white/30 hover:bg-white/10 hover:scale-105 text-lg px-10 py-6 font-heading font-semibold transition-all"
+            >
+              <a href="#about">Explore the Conference</a>
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Bottom wave decoration */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" className="w-full text-background fill-current">
-          <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
-        </svg>
-      </div>
+      {/* Scroll cue */}
+      <a
+        href="#about"
+        aria-label="Scroll to content"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 hover:text-gold transition-colors animate-float z-10"
+      >
+        <ChevronDown className="w-7 h-7" />
+      </a>
     </section>
   );
 };
