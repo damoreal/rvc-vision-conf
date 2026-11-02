@@ -23,7 +23,7 @@ import {
 import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Calendar, Clock, MapPin } from "lucide-react";
+import { Calendar, Clock, MapPin, Wifi } from "lucide-react";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters").max(50),
@@ -86,44 +86,74 @@ const Registration = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
-      <div className="pt-24 pb-16">
-        <div className="container mx-auto px-4">
-          {/* Conference Details */}
-          <div className="max-w-4xl mx-auto mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">
-              Register for RVC 2025
-            </h1>
-            <div className="h-1 w-24 bg-gradient-hero mx-auto mb-8 rounded-full"></div>
 
-            <div className="bg-gradient-hero text-primary-foreground rounded-2xl p-8 mb-8">
-              <h2 className="text-2xl font-bold mb-6 text-center">Conference Details</h2>
-              <div className="grid md:grid-cols-3 gap-6">
+      {/* Dark intro banner */}
+      <div className="relative bg-ink overflow-hidden pt-28 pb-16">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl breathe-gold"></div>
+          <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-gold/10 rounded-full blur-3xl breathe-gold"></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-gold font-heading font-bold text-xs tracking-[0.3em] uppercase mb-4">
+              Be There — In Person or Online
+            </p>
+            <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+              Register for <span className="font-display tracking-wide shimmer-gold bg-clip-text text-transparent text-glow-gold">RVC 2026</span>
+            </h1>
+            <div className="h-1 w-24 bg-gradient-gold mx-auto rounded-full"></div>
+          </div>
+
+          {/* Conference details */}
+          <div className="max-w-4xl mx-auto mt-12">
+            <div className="glass-dark rounded-3xl p-8 md:p-10">
+              <h2 className="font-heading font-bold text-xl uppercase tracking-[0.2em] text-gold mb-8 text-center">
+                Conference Details
+              </h2>
+              <div className="grid md:grid-cols-3 gap-8">
                 <div className="flex flex-col items-center text-center">
-                  <Calendar className="w-8 h-8 mb-3" />
-                  <h3 className="font-semibold mb-2">Date</h3>
-                  <p className="text-sm">10th - 14th December, 2025</p>
+                  <div className="w-12 h-12 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center mb-4">
+                    <Calendar className="w-6 h-6 text-gold" />
+                  </div>
+                  <h3 className="font-heading font-bold text-white mb-2">Date</h3>
+                  <p className="text-sm text-white/70">9th – 13th December, 2026</p>
                 </div>
                 <div className="flex flex-col items-center text-center">
-                  <Clock className="w-8 h-8 mb-3" />
-                  <h3 className="font-semibold mb-2">Time</h3>
-                  <p className="text-sm">Morning Session: 9am WAT</p>
-                  <p className="text-sm">Evening Session: 4pm WAT</p>
+                  <div className="w-12 h-12 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center mb-4">
+                    <Clock className="w-6 h-6 text-gold" />
+                  </div>
+                  <h3 className="font-heading font-bold text-white mb-2">Time</h3>
+                  <p className="text-sm text-white/70">Opening: Wed 9th · 5pm WAT</p>
+                  <p className="text-sm text-white/70">Thu–Sat: 9am &amp; 4pm WAT</p>
+                  <p className="text-sm text-white/70">Grand Finale: Sun 9am WAT</p>
                 </div>
                 <div className="flex flex-col items-center text-center">
-                  <MapPin className="w-8 h-8 mb-3" />
-                  <h3 className="font-semibold mb-2">Venue</h3>
-                  <p className="text-sm">The Godhouse Centre, Warri</p>
-                  <p className="text-xs mt-1">2, Indian Street, off Jakpa Road, by Mansal Hotel, Effurun-Warri, Delta State, Nigeria</p>
+                  <div className="w-12 h-12 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center mb-4">
+                    <MapPin className="w-6 h-6 text-gold" />
+                  </div>
+                  <h3 className="font-heading font-bold text-white mb-2">Venue</h3>
+                  <p className="text-sm text-white/70">The Godhouse Centre, Warri</p>
+                  <p className="text-xs text-white/50 mt-1">
+                    2, Indian Street, off Jakpa Road, by Mansal Hotel, Effurun-Warri, Delta State, Nigeria
+                  </p>
                 </div>
+              </div>
+              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-center gap-3 text-sm text-white/70">
+                <Wifi className="w-4 h-4 text-gold" />
+                Physical and virtual — streamed live on Wholeword TV, YouTube and Facebook channels
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Registration Form */}
-          <div className="max-w-2xl mx-auto bg-card border border-border rounded-2xl p-8 shadow-lg">
-            <h2 className="text-2xl font-bold mb-6">Registration Form</h2>
-            
+      {/* Registration Form */}
+      <div className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto bg-card border border-border rounded-3xl p-8 md:p-10 shadow-lg">
+            <h2 className="font-serif text-2xl font-bold mb-2">Registration Form</h2>
+            <div className="h-1 w-16 bg-gradient-gold rounded-full mb-8"></div>
+
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -316,7 +346,7 @@ const Registration = () => {
 
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-hero text-primary-foreground hover:opacity-90 text-lg py-6"
+                  className="w-full rounded-full bg-gold text-gold-foreground hover:bg-gold/90 font-heading font-bold text-lg py-6 shadow-gold"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Submitting..." : "Complete Registration"}

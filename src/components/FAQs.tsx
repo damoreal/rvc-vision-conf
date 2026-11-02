@@ -5,53 +5,62 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const FAQs = () => {
-  const faqs = [
-    {
-      question: "Who can attend RVC 2025?",
-      answer: "RVC 2025 is open to everyone! Whether you're a first-time attendee or a returning participant, we welcome all who desire to experience God's presence and learn how to manifest Heaven on Earth in their daily lives.",
-    },
-    {
-      question: "What is the registration fee?",
-      answer: "Registration details and fees will be provided on the registration page. Early bird discounts are available for those who register before the deadline. Group registrations also qualify for special rates.",
-    },
-    {
-      question: "Will there be accommodation arrangements?",
-      answer: "Yes, we have partnered with several hotels in Warri to provide accommodation for out-of-town participants. Details and booking information will be sent to registered attendees.",
-    },
-    {
-      question: "What should I bring to the conference?",
-      answer: "We recommend bringing your Bible, a notebook for taking notes, and an open heart to receive from God. All sessions will be held in air-conditioned halls, so dress comfortably.",
-    },
-    {
-      question: "Will the sessions be recorded?",
-      answer: "Yes, all sessions will be professionally recorded and made available to registered participants after the conference. This allows you to revisit the teachings and share with those who couldn't attend.",
-    },
-    {
-      question: "Is there parking available?",
-      answer: "Yes, The Godhouse Centre has ample parking space available for all attendees. Additional parking arrangements have been made nearby for overflow during peak sessions.",
-    },
-    {
-      question: "Can I register on-site?",
-      answer: "While we encourage pre-registration to help us plan better, on-site registration will be available. However, early registration ensures you don't miss any sessions and may qualify for special benefits.",
-    },
-    {
-      question: "Are children welcome?",
-      answer: "Absolutely! We have a dedicated children's program running parallel to the main sessions. Children will have age-appropriate teaching and activities in a safe, fun environment.",
-    },
-  ];
+const faqs = [
+  {
+    question: "Who can attend RVC 2026?",
+    answer:
+      "RVC 2026 is an interdenominational gathering of believers — everyone is welcome, whether you're a first-time attendee or a returning participant. You don't need to belong to any particular church to join us in Warri or online.",
+  },
+  {
+    question: "When and where is the conference holding?",
+    answer:
+      "RVC 2026 runs from Wednesday 9th to Sunday 13th December 2026 at The Godhouse Centre, Warri — 2, Indian Street, off Jakpa Road, by Mansal Hotel, Effurun-Warri, Delta State, Nigeria.",
+  },
+  {
+    question: "What are the session times?",
+    answer:
+      "The opening session holds on Wednesday 9th at 5pm WAT. From Thursday 10th to Saturday 12th, there are two sessions daily — Morning at 9am WAT and Evening at 4pm WAT. The grand finale holds on Sunday 13th at 9am WAT.",
+  },
+  {
+    question: "Can I attend virtually if I can't travel?",
+    answer:
+      "Yes! Every session will be streamed live on Wholeword TV, YouTube and the Facebook channels of The Godhouse Centre. Choose 'Virtual' when registering and join from anywhere in the world.",
+  },
+  {
+    question: "What is the registration fee?",
+    answer:
+      "Registration details and fees are on the registration page. Early bird discounts are available, and group registrations qualify for special rates.",
+  },
+  {
+    question: "Will there be accommodation arrangements?",
+    answer:
+      "Yes, we have partnered with several hotels in Warri to provide accommodation for out-of-town participants. Indicate your need for accommodation on the registration form and details will be sent to you.",
+  },
+  {
+    question: "What should I bring to the conference?",
+    answer:
+      "Bring your Bible, a notebook, and an open heart to receive from God. All sessions are held in comfortable halls, so dress comfortably.",
+  },
+  {
+    question: "Can I register on-site?",
+    answer:
+      "While we encourage pre-registration to help us plan better, on-site registration will be available. Early registration ensures you don't miss any sessions and may qualify for special benefits.",
+  },
+];
 
+const FAQs = () => {
   return (
-    <section id="faqs" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+    <section id="faqs" className="py-24 bg-background relative overflow-hidden">
+      <div className="container mx-auto px-4 relative">
+        <div className="text-center mb-14">
+          <p className="text-gold font-heading font-bold text-xs tracking-[0.3em] uppercase mb-4">
+            Good to Know
+          </p>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">
             Frequently Asked Questions
           </h2>
-          <div className="h-1 w-24 bg-gradient-hero mx-auto mb-8 rounded-full"></div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Got questions? We've got answers!
-          </p>
+          <div className="h-1 w-24 bg-gradient-gold mx-auto rounded-full"></div>
+          <p className="text-lg text-muted-foreground mt-6">Got questions? We've got answers!</p>
         </div>
 
         <div className="max-w-3xl mx-auto">
@@ -60,9 +69,9 @@ const FAQs = () => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-card border border-border rounded-lg px-6"
+                className="bg-card border border-border rounded-2xl px-6 hover:border-gold/50 transition-colors"
               >
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:text-primary">
+                <AccordionTrigger className="text-left font-heading font-semibold text-foreground hover:text-gold hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground leading-relaxed">
