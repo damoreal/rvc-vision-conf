@@ -99,7 +99,7 @@ const Registration = () => {
               Be There — In Person or Online
             </p>
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
-              Register for <span className="font-display tracking-wide shimmer-gold bg-clip-text text-transparent text-glow-gold">RVC 2026</span>
+              Register for <span className="font-display tracking-wide text-gold text-glow-gold">RVC 2026</span>
             </h1>
             <div className="h-1 w-24 bg-gradient-gold mx-auto rounded-full"></div>
           </div>

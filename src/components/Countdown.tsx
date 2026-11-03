@@ -80,7 +80,7 @@ const Countdown = () => {
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-white mb-4">
             Countdown to{" "}
-            <span className="font-display tracking-wide shimmer-gold bg-clip-text text-transparent text-glow-gold">
+            <span className="font-display tracking-wide text-gold text-glow-gold">
               RVC 2026
             </span>
           </h2>

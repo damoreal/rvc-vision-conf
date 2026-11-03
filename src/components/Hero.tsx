@@ -80,7 +80,7 @@ const Hero = () => {
             <span className="block intro-reveal text-[19vw] md:text-[13vw] lg:text-[11rem] text-glow-soft" style={{ animationDelay: "0.35s" }}>
               MANIFES
             </span>
-            <span className="block intro-reveal text-[19vw] md:text-[13vw] lg:text-[11rem] md:ml-[14%] shimmer-gold bg-clip-text text-transparent text-glow-gold" style={{ animationDelay: "0.55s" }}>
+            <span className="block intro-reveal text-[19vw] md:text-[13vw] lg:text-[11rem] md:ml-[14%] text-gold text-glow-gold" style={{ animationDelay: "0.55s" }}>
               TATION
             </span>
           </h1>
