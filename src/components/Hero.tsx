@@ -37,7 +37,7 @@ const Hero = () => {
           className="w-full h-full object-cover object-center"
         />
         {/* Cinematic scrims so the wordmark and content stay legible */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(170,45%,6%,0.82)_0%,hsl(170,45%,6%,0.55)_38%,hsl(170,45%,7%,0.88)_78%,hsl(170,45%,7%,0.98)_100%)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(170,45%,6%,0.68)_0%,hsl(170,45%,6%,0.42)_38%,hsl(170,45%,7%,0.86)_78%,hsl(170,45%,7%,0.97)_100%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(170,45%,5%,0.55)_100%)]"></div>
       </div>
 
@@ -80,7 +80,7 @@ const Hero = () => {
             <span className="block intro-reveal text-[19vw] md:text-[13vw] lg:text-[11rem] text-glow-soft" style={{ animationDelay: "0.35s" }}>
               MANIFES
             </span>
-            <span className="block intro-reveal text-[19vw] md:text-[13vw] lg:text-[11rem] md:ml-[14%] shimmer-gold bg-clip-text text-transparent text-glow-gold" style={{ animationDelay: "0.55s" }}>
+            <span className="block intro-reveal text-[19vw] md:text-[13vw] lg:text-[11rem] md:ml-[14%] text-gold text-glow-gold" style={{ animationDelay: "0.55s" }}>
               TATION
             </span>
           </h1>
