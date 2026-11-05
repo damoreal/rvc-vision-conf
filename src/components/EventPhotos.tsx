@@ -30,15 +30,15 @@ const EventPhotos = () => {
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 text-gold font-heading font-bold text-xs tracking-[0.3em] uppercase mb-4">
             <Camera className="w-4 h-4" />
-            From Our Altar
+            From Past Conferences
           </div>
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">
             Moments of Manifestation
           </h2>
           <div className="h-1 w-24 bg-gradient-gold mx-auto rounded-full"></div>
           <p className="text-lg text-muted-foreground mt-6 max-w-2xl mx-auto">
-            Glimpses of what God is doing at The Godhouse Centre — the same fire
-            you will step into at RVC 2026.
+            Glimpses from past editions of Running with the Vision Conference —
+            the same fire you will step into at RVC 2026.
           </p>
         </div>
 

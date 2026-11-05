@@ -221,4 +221,19 @@ luminous gold accents, ivory light sections. */
       transform: translateY(0);
     }
   }
+
+  /* Slow cinematic zoom on the hero backdrop */
+  .ken-burns {
+    animation: ken-burns 28s ease-in-out infinite alternate;
+    transform-origin: 62% 40%;
+  }
+
+  @keyframes ken-burns {
+    from {
+      transform: scale(1) translateY(0);
+    }
+    to {
+      transform: scale(1.1) translateY(-1.5%);
+    }
+  }
 }
