@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Calendar, MapPin, Clock, Sparkles, ChevronDown } from "lucide-react";
-import flyerAsset from "@/assets/rvc2026-flyer.jpg.asset.json";
+import heroWorship from "@/assets/hero-worship.jpg";
 
 interface Ember {
   left: string;
@@ -12,6 +12,12 @@ interface Ember {
   delay: number;
   driftX: string;
 }
+
+const sidePhrases = [
+  "The gathering where promises become visible...",
+  "Five days in the glory of God...",
+  "The conference you have been waiting for...",
+];
 
 const Hero = () => {
   const embers = useMemo<Ember[]>(
@@ -29,16 +35,16 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-ink pt-24">
-      {/* Flyer artwork backdrop */}
+      {/* Cinematic landscape backdrop */}
       <div className="absolute inset-0">
         <img
-          src={flyerAsset.url}
-          alt="RVC 2026 Manifestation"
-          className="w-full h-full object-cover object-center"
+          src={heroWorship}
+          alt="A worshipper lifted in worship"
+          className="w-full h-full object-cover object-[68%_center] ken-burns"
         />
         {/* Cinematic scrims so the wordmark and content stay legible */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(170,45%,6%,0.68)_0%,hsl(170,45%,6%,0.42)_38%,hsl(170,45%,7%,0.86)_78%,hsl(170,45%,7%,0.97)_100%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(170,45%,5%,0.55)_100%)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(170,45%,6%,0.7)_0%,hsl(170,45%,6%,0.18)_28%,hsl(170,45%,5%,0.3)_52%,hsl(170,45%,7%,0.88)_80%,hsl(170,45%,7%,0.97)_100%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_62%_38%,transparent_0%,hsl(170,45%,5%,0.4)_100%)]"></div>
       </div>
 
       {/* Floating embers */}
@@ -63,6 +69,21 @@ const Hero = () => {
       {/* Ambient glow blooms */}
       <div className="absolute -top-24 left-1/4 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl breathe-gold pointer-events-none"></div>
       <div className="absolute bottom-10 right-1/5 w-80 h-80 rounded-full bg-gold/10 blur-3xl breathe-gold pointer-events-none"></div>
+
+      {/* Whispered side phrases, like a crowd in expectation */}
+      <div className="hidden xl:block absolute left-[6%] top-1/2 -translate-y-1/2 space-y-12 pointer-events-none">
+        {sidePhrases.map((phrase, i) => (
+          <p
+            key={phrase}
+            className={`intro-reveal max-w-[220px] font-heading font-semibold uppercase tracking-wide text-sm leading-relaxed ${
+              i === 1 ? "text-gold" : "text-white/45"
+            }`}
+            style={{ animationDelay: `${1.3 + i * 0.25}s` }}
+          >
+            {phrase}
+          </p>
+        ))}
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-6xl mx-auto">
