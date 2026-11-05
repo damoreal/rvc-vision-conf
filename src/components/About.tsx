@@ -1,10 +1,12 @@
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Radio } from "lucide-react";
+import { ArrowRight, Radio, Sparkles } from "lucide-react";
 import servicePreaching from "@/assets/service-preaching.jpg.asset.json";
 import worshipTeam from "@/assets/worship-team.jpg.asset.json";
 import worshipper from "@/assets/worshipper-praying.jpg.asset.json";
 import minister from "@/assets/minister-preaching.jpg.asset.json";
+import flyerAsset from "@/assets/rvc2026-flyer.jpg.asset.json";
 
 const stats = [
   { value: "5", label: "Days of Impact" },
@@ -13,7 +15,85 @@ const stats = [
   { value: "1000+", label: "Believers Expected" },
 ];
 
+/* Each collage layer floats at its own depth, reacting to scroll and mouse */
+const layers = [
+  {
+    src: servicePreaching.url,
+    alt: "Preaching session at The Godhouse Centre",
+    caption: "The Word goes forth",
+    className: "top-0 left-0 w-[58%] h-[54%]",
+    depth: 0.55,
+    rotate: -2,
+  },
+  {
+    src: worshipTeam.url,
+    alt: "Worship team ministering",
+    caption: "Worship without walls",
+    className: "top-[10%] right-0 w-[36%] h-[38%]",
+    depth: 1.0,
+    rotate: 3,
+  },
+  {
+    src: worshipper.url,
+    alt: "A worshipper in prayer",
+    caption: "Altars that answer by fire",
+    className: "bottom-[6%] left-[4%] w-[34%] h-[40%]",
+    depth: 1.5,
+    rotate: -4,
+  },
+  {
+    src: minister.url,
+    alt: "Minister on stage",
+    caption: "Impartation moments",
+    className: "bottom-0 right-[10%] w-[30%] h-[34%]",
+    depth: 0.8,
+    rotate: 2,
+  },
+];
+
 const About = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const el = sectionRef.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight;
+        // ~0 when the section is centred in the viewport
+        setScrollProgress((rect.top + rect.height / 2 - vh / 2) / vh);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const handleMouse = (e: React.MouseEvent) => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    setTilt({
+      x: (e.clientX - r.left) / r.width - 0.5,
+      y: (e.clientY - r.top) / r.height - 0.5,
+    });
+  };
+
+  const layerStyle = (depth: number, rotate: number): React.CSSProperties => ({
+    transform: `translate3d(${tilt.x * depth * 36}px, ${
+      scrollProgress * depth * 90 + tilt.y * depth * 28
+    }px, 0) rotate(${rotate}deg)`,
+    willChange: "transform",
+  });
+
   return (
     <section id="about" className="py-24 bg-gradient-section relative overflow-hidden">
       {/* soft emerald wash */}
@@ -62,28 +142,68 @@ const About = () => {
             </Button>
           </div>
 
-          {/* Photo collage */}
-          <div className="relative h-[480px] md:h-[560px] hidden sm:block">
-            <img
-              src={servicePreaching.url}
-              alt="Preaching session at The Godhouse Centre"
-              className="absolute top-0 left-0 w-[62%] rounded-2xl shadow-2xl border-4 border-white object-cover h-[58%]"
-            />
-            <img
-              src={worshipTeam.url}
-              alt="Worship team ministering"
-              className="absolute top-[16%] right-0 w-[42%] rounded-2xl shadow-2xl border-4 border-white object-cover h-[42%] rotate-3"
-            />
-            <img
-              src={worshipper.url}
-              alt="A worshipper in prayer"
-              className="absolute bottom-0 left-[8%] w-[34%] rounded-2xl shadow-2xl border-4 border-white object-cover h-[40%] -rotate-3"
-            />
-            <img
-              src={minister.url}
-              alt="Minister on stage"
-              className="absolute bottom-[2%] right-[6%] w-[36%] rounded-2xl shadow-2xl border-4 border-white object-cover h-[44%]"
-            />
+          {/* Interactive photo collage — moves with scroll and mouse */}
+          <div
+            ref={sectionRef}
+            onMouseMove={handleMouse}
+            onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+            className="relative h-[500px] md:h-[580px] hidden sm:block"
+          >
+            {layers.map((layer) => (
+              <figure
+                key={layer.src}
+                style={layerStyle(layer.depth, layer.rotate)}
+                className={`absolute overflow-hidden rounded-2xl shadow-2xl border-4 border-white group ${layer.className}`}
+              >
+                <img
+                  src={layer.src}
+                  alt={layer.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-ink/90 to-transparent px-3 pt-6 pb-2.5 text-left">
+                  <span className="text-white text-xs font-heading font-semibold tracking-wide">
+                    {layer.caption}
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+
+            {/* Official flyer card, front layer */}
+            <figure
+              style={layerStyle(2.1, -1.5)}
+              className="absolute top-[30%] right-[2%] w-[42%] overflow-hidden rounded-xl shadow-2xl border border-gold/40 shadow-gold/30"
+            >
+              <img
+                src={flyerAsset.url}
+                alt="RVC 2026 Manifestation official flyer"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-ink/80 backdrop-blur-sm border border-gold/40 rounded-full px-3 py-1">
+                <Sparkles className="w-3 h-3 text-gold" />
+                <span className="text-gold text-[10px] font-heading font-bold tracking-[0.15em] uppercase">
+                  Official Flyer
+                </span>
+              </div>
+            </figure>
+          </div>
+
+          {/* Mobile fallback — flyer first, then a simple grid */}
+          <div className="sm:hidden space-y-4">
+            <figure className="relative rounded-xl overflow-hidden border border-gold/40 shadow-lg">
+              <img src={flyerAsset.url} alt="RVC 2026 Manifestation official flyer" className="w-full" />
+              <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-ink/80 rounded-full px-3 py-1">
+                <Sparkles className="w-3 h-3 text-gold" />
+                <span className="text-gold text-[10px] font-heading font-bold tracking-[0.15em] uppercase">
+                  Official Flyer
+                </span>
+              </div>
+            </figure>
+            <div className="grid grid-cols-2 gap-3">
+              <img src={servicePreaching.url} alt="Preaching session" className="rounded-xl w-full h-36 object-cover" />
+              <img src={worshipTeam.url} alt="Worship team" className="rounded-xl w-full h-36 object-cover" />
+              <img src={worshipper.url} alt="Worshipper in prayer" className="rounded-xl w-full h-36 object-cover" />
+              <img src={minister.url} alt="Minister on stage" className="rounded-xl w-full h-36 object-cover" />
+            </div>
           </div>
         </div>
 
