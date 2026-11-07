@@ -53,8 +53,8 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <Link to="/gallery" className="text-sm text-white/80 hover:text-gold transition-colors">
-                  Image Gallery
+                <Link to="/invite" className="text-sm text-white/80 hover:text-gold transition-colors">
+                  Create Your Invite
                 </Link>
               </li>
             </ul>
