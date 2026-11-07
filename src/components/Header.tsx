@@ -33,7 +33,7 @@ const Header = () => {
     { name: "Home", path: "/" },
     { name: "Registration", path: "/registration" },
     { name: "FAQs", path: "/#faqs", onClick: scrollToFAQs },
-    { name: "Image Gallery", path: "/gallery" },
+    { name: "Create Invite", path: "/invite" },
   ];
 
   const isActive = (path: string) => {
