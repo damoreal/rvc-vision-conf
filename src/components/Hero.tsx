@@ -7,6 +7,11 @@ import stageScene from "@/assets/hero_scene_stage.jpg.asset.json";
 import prayerScene from "@/assets/hero_scene_prayer.jpg.asset.json";
 import prayerCrowdScene from "@/assets/hero_scene_prayer_crowd.jpg.asset.json";
 import ministerScene from "@/assets/hero_scene_minister.jpeg.asset.json";
+import { useEffect, useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const heroSlides = [
   { src: heroWorship, alt: "A worshipper lifted in worship" },
@@ -67,9 +72,10 @@ const Hero = () => {
             src={slide.src}
             alt={slide.alt}
             aria-hidden="true"
-            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1400ms] ease-in-out ${
-              activeSlide === index ? "opacity-100 ken-burns" : "opacity-0"
-            }`}
+            className={cn(
+              "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1400ms] ease-in-out",
+              activeSlide === index ? "opacity-100 ken-burns" : "opacity-0",
+            )}
           />
         ))}
         <div className="absolute inset-0 bg-ink/30"></div>
@@ -108,11 +114,12 @@ const Hero = () => {
                   variant="ghost"
                   aria-pressed={selected}
                   onClick={() => setActiveSlide(phraseSlides[index])}
-                  className={`group h-auto w-full justify-start whitespace-normal rounded-none border-l-2 px-3 py-2 text-left font-heading text-sm font-semibold uppercase leading-relaxed transition-all duration-500 sm:px-4 sm:py-3 sm:text-lg ${
+                  className={cn(
+                    "group h-auto w-full justify-start whitespace-normal rounded-none border-l-2 px-3 py-2 text-left font-heading text-sm font-semibold uppercase leading-relaxed transition-all duration-500 sm:px-4 sm:py-3 sm:text-lg",
                     selected
                       ? "border-gold bg-ink/45 text-gold text-glow-gold"
-                      : "border-secondary-foreground/30 text-secondary-foreground hover:border-gold/60 hover:bg-ink/30 hover:text-secondary-foreground"
-                  }`}
+                      : "border-secondary-foreground/30 text-secondary-foreground hover:border-gold/60 hover:bg-ink/30 hover:text-secondary-foreground",
+                  )}
                 >
                   <span className="mr-3 text-xs text-gold/80">0{index + 1}</span>
                   <span>{phrase}</span>
@@ -123,9 +130,10 @@ const Hero = () => {
               {heroSlides.map((slide, index) => (
                 <span
                   key={slide.src}
-                  className={`h-1 rounded-full transition-all duration-500 ${
-                    activeSlide === index ? "w-8 bg-gold" : "w-2 bg-foreground/35"
-                  }`}
+                  className={cn(
+                    "h-1 rounded-full transition-all duration-500",
+                    activeSlide === index ? "w-8 bg-gold" : "w-2 bg-secondary-foreground/50",
+                  )}
                 />
               ))}
             </div>
