@@ -51,11 +51,11 @@ const Hero = () => {
   );
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    const timer = window.setTimeout(() => {
       setActiveSlide((current) => (current + 1) % heroSlides.length);
     }, 5000);
-    return () => window.clearInterval(timer);
-  }, []);
+    return () => window.clearTimeout(timer);
+  }, [activeSlide]);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-ink pt-24">
@@ -97,8 +97,8 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 py-16 lg:grid-cols-[minmax(230px,0.7fr)_minmax(0,1.8fr)] lg:gap-16">
-          <div className="order-2 space-y-3 lg:order-1 lg:space-y-5" aria-label="Conference highlights">
+        <div className="mx-auto grid max-w-7xl items-center gap-4 py-8 lg:grid-cols-[minmax(230px,0.7fr)_minmax(0,1.8fr)] lg:gap-16 lg:py-16">
+          <div className="order-2 space-y-1.5 lg:order-1 lg:space-y-5" aria-label="Conference highlights">
             {sidePhrases.map((phrase, index) => {
               const selected = activePhrase === index;
               return (
@@ -108,7 +108,7 @@ const Hero = () => {
                   variant="ghost"
                   aria-pressed={selected}
                   onClick={() => setActiveSlide(phraseSlides[index])}
-                  className={`group h-auto w-full justify-start whitespace-normal rounded-none border-l-2 px-4 py-3 text-left font-heading text-base font-semibold uppercase leading-relaxed transition-all duration-500 sm:text-lg ${
+                  className={`group h-auto w-full justify-start whitespace-normal rounded-none border-l-2 px-3 py-2 text-left font-heading text-sm font-semibold uppercase leading-relaxed transition-all duration-500 sm:px-4 sm:py-3 sm:text-lg ${
                     selected
                       ? "border-gold bg-ink/45 text-gold text-glow-gold"
                       : "border-secondary-foreground/30 text-secondary-foreground/80 hover:border-gold/60 hover:bg-ink/30 hover:text-secondary-foreground"
@@ -139,16 +139,16 @@ const Hero = () => {
               </p>
             </div>
 
-            <h1 className="font-display select-none leading-[0.82] text-6xl text-secondary-foreground text-glow-soft sm:text-8xl xl:text-[10rem]">
+            <h1 className="font-display select-none leading-[0.82] text-5xl text-secondary-foreground text-glow-soft sm:text-8xl xl:text-[10rem]">
               <span className="block intro-reveal" style={{ animationDelay: "0.35s" }}>MANIFES</span>
               <span className="block intro-reveal text-gold text-glow-gold sm:ml-[12%]" style={{ animationDelay: "0.55s" }}>TATION</span>
             </h1>
 
-            <p className="intro-reveal mx-auto mt-7 max-w-2xl font-serif text-lg italic leading-relaxed text-secondary-foreground/90 sm:text-xl lg:mx-0" style={{ animationDelay: "0.8s" }}>
+            <p className="intro-reveal mx-auto mt-4 max-w-2xl font-serif text-base italic leading-relaxed text-secondary-foreground/90 sm:mt-7 sm:text-xl lg:mx-0" style={{ animationDelay: "0.8s" }}>
               Spirit-inspired teachings and impartation — empowering believers for the work of ministry, until Heaven's reality is made visible.
             </p>
 
-            <div className="intro-reveal mt-9 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start" style={{ animationDelay: "1.05s" }}>
+            <div className="intro-reveal mt-5 flex flex-col justify-center gap-3 sm:mt-9 sm:flex-row lg:justify-start" style={{ animationDelay: "1.05s" }}>
               <Button asChild size="lg" className="rounded-full bg-gold px-10 py-6 font-heading text-lg font-bold text-gold-foreground shadow-gold transition-all hover:scale-105 hover:bg-gold-light">
                 <Link to="/registration">Register Now</Link>
               </Button>
