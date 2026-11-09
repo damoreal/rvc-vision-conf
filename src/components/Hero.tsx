@@ -31,11 +31,12 @@ const sidePhrases = [
   "The conference you have been waiting for...",
 ];
 
-const phraseSlides = [0, 1, 3];
+const slidePhrases = [0, 1, 2, 0, 1];
+const phraseSlides = [0, 1, 2];
 
 const Hero = () => {
   const [activeSlide, setActiveSlide] = useState(0);
-  const activePhrase = activeSlide % sidePhrases.length;
+  const activePhrase = slidePhrases[activeSlide];
   const embers = useMemo<Ember[]>(
     () =>
       Array.from({ length: 14 }, (_, i) => ({
