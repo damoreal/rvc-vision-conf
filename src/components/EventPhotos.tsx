@@ -7,20 +7,22 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Camera } from "lucide-react";
-import servicePreaching from "@/assets/service-preaching.jpg.asset.json";
-import ministerPreaching from "@/assets/minister-preaching.jpg.asset.json";
-import worshipTeam from "@/assets/worship-team.jpg.asset.json";
+import conferenceSpeaker from "@/assets/conference_speaker.jpeg.asset.json";
+import apostolicImpartation from "@/assets/apostolic_impartation.jpg.asset.json";
+import totalResurrender from "@/assets/total_resurrender.jpg.asset.json";
+import worshipConference from "@/assets/worship_conference.jpg.asset.json";
+import spiritInspiredPrayers from "@/assets/spirit_inspired_prayers.jpg.asset.json";
 import worshipperPraying from "@/assets/worshipper-praying.jpg.asset.json";
 import worshipperPraying2 from "@/assets/worshipper-praying-2.jpg.asset.json";
-import thanksgiving from "@/assets/thanksgiving-service.jpg.asset.json";
 
 const photos = [
-  { src: servicePreaching.url, caption: "The Word ministered with power", tall: true },
-  { src: worshipTeam.url, caption: "Worship that fills the room", tall: false },
-  { src: ministerPreaching.url, caption: "Apostolic impartation moments", tall: true },
-  { src: worshipperPraying2.url, caption: "Hearts tuned to Heaven", tall: true },
-  { src: thanksgiving.url, caption: "Thanksgiving Service with Apostle TD Philips", tall: false },
-  { src: worshipperPraying.url, caption: "Deep worship, deep surrender", tall: true },
+  { src: conferenceSpeaker.url, caption: "The Word ministered with power" },
+  { src: worshipConference.url, caption: "Worship that fills the room" },
+  { src: apostolicImpartation.url, caption: "Apostolic impartation moments" },
+  { src: worshipperPraying2.url, caption: "Hearts tuned to Heaven" },
+  { src: totalResurrender.url, caption: "Total Resurrender" },
+  { src: worshipperPraying.url, caption: "Deep worship, deep surrender" },
+  { src: spiritInspiredPrayers.url, caption: "Spirit-inspired prayers" },
 ];
 
 const EventPhotos = () => {
@@ -57,11 +59,11 @@ const EventPhotos = () => {
           <CarouselContent className="-ml-3">
             {photos.map((photo, index) => (
               <CarouselItem key={index} className="pl-3 md:basis-1/2 lg:basis-1/3">
-                <div className="group relative overflow-hidden rounded-2xl border border-border shadow-lg hover:shadow-gold transition-all duration-500 h-80">
+                <div className="group relative h-80 overflow-hidden rounded-sm border border-border shadow-lg transition-all duration-500 hover:shadow-gold">
                   <img
                     src={photo.src}
                     alt={photo.caption}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="h-[112%] w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,hsl(170,45%,7%,0.85)_100%)] opacity-80 group-hover:opacity-100 transition-opacity"></div>
                   <div className="absolute bottom-0 inset-x-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
