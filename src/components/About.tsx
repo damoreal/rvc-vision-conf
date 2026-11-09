@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Radio, Sparkles } from "lucide-react";
-import servicePreaching from "@/assets/service-preaching.jpg.asset.json";
+import conferenceTeaching from "@/assets/conference_teaching_clean.jpg.asset.json";
 import worshipTeam from "@/assets/worship-team.jpg.asset.json";
 import worshipper from "@/assets/worshipper-praying.jpg.asset.json";
-import minister from "@/assets/minister-preaching.jpg.asset.json";
+import minister from "@/assets/hero_scene_minister.jpeg.asset.json";
+import prayerScene from "@/assets/hero_scene_prayer.jpg.asset.json";
 import flyerAsset from "@/assets/rvc2026-flyer.jpg.asset.json";
+import { projectAssetUrl } from "@/lib/utils";
 
 const stats = [
   { value: "5", label: "Days of Impact" },
@@ -18,36 +20,32 @@ const stats = [
 /* Each collage layer floats at its own depth, reacting to scroll and mouse */
 const layers = [
   {
-    src: servicePreaching.url,
-    alt: "Preaching session at The Godhouse Centre",
-    caption: "The Word goes forth",
-    className: "top-0 left-0 w-[58%] h-[54%]",
+    src: projectAssetUrl(conferenceTeaching.url),
+    alt: "A conference teaching session",
+    className: "col-span-7 row-span-2",
     depth: 0.55,
-    rotate: -2,
+    rotate: 0,
   },
   {
-    src: worshipTeam.url,
+    src: projectAssetUrl(worshipTeam.url),
     alt: "Worship team ministering",
-    caption: "Worship without walls",
-    className: "top-[10%] right-0 w-[36%] h-[38%]",
+    className: "col-span-5 row-span-1",
     depth: 1.0,
-    rotate: 3,
+    rotate: 0,
   },
   {
-    src: worshipper.url,
-    alt: "A worshipper in prayer",
-    caption: "Altars that answer by fire",
-    className: "bottom-[6%] left-[4%] w-[34%] h-[40%]",
+    src: projectAssetUrl(prayerScene.url),
+    alt: "A believer praying at the conference",
+    className: "col-span-3 row-span-1",
     depth: 1.5,
-    rotate: -4,
+    rotate: 0,
   },
   {
-    src: minister.url,
+    src: projectAssetUrl(minister.url),
     alt: "Minister on stage",
-    caption: "Impartation moments",
-    className: "bottom-0 right-[10%] w-[30%] h-[34%]",
+    className: "col-span-2 row-span-1",
     depth: 0.8,
-    rotate: 2,
+    rotate: 0,
   },
 ];
 
@@ -147,50 +145,27 @@ const About = () => {
             ref={sectionRef}
             onMouseMove={handleMouse}
             onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-            className="relative h-[500px] md:h-[580px] hidden sm:block"
+            className="relative hidden h-[500px] grid-cols-12 grid-rows-2 gap-3 sm:grid md:h-[580px]"
           >
             {layers.map((layer) => (
               <figure
                 key={layer.src}
                 style={layerStyle(layer.depth, layer.rotate)}
-                className={`absolute overflow-hidden rounded-2xl shadow-2xl border-4 border-white group ${layer.className}`}
+                className={`relative overflow-hidden rounded-sm border border-border/70 shadow-xl ${layer.className}`}
               >
                 <img
                   src={layer.src}
                   alt={layer.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="h-full w-full object-cover object-top transition-transform duration-700 hover:scale-[1.03]"
                 />
-                <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-ink/90 to-transparent px-3 pt-6 pb-2.5 text-left">
-                  <span className="text-white text-xs font-heading font-semibold tracking-wide">
-                    {layer.caption}
-                  </span>
-                </figcaption>
               </figure>
             ))}
-
-            {/* Official flyer card, front layer */}
-            <figure
-              style={layerStyle(2.1, -1.5)}
-              className="absolute top-[30%] right-[2%] w-[42%] overflow-hidden rounded-xl shadow-2xl border border-gold/40 shadow-gold/30"
-            >
-              <img
-                src={flyerAsset.url}
-                alt="RVC 2026 Manifestation official flyer"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-ink/80 backdrop-blur-sm border border-gold/40 rounded-full px-3 py-1">
-                <Sparkles className="w-3 h-3 text-gold" />
-                <span className="text-gold text-[10px] font-heading font-bold tracking-[0.15em] uppercase">
-                  Official Flyer
-                </span>
-              </div>
-            </figure>
           </div>
 
           {/* Mobile fallback — flyer first, then a simple grid */}
           <div className="sm:hidden space-y-4">
             <figure className="relative rounded-xl overflow-hidden border border-gold/40 shadow-lg">
-              <img src={flyerAsset.url} alt="RVC 2026 Manifestation official flyer" className="w-full" />
+              <img src={projectAssetUrl(flyerAsset.url)} alt="RVC 2026 Manifestation official flyer" className="w-full" />
               <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-ink/80 rounded-full px-3 py-1">
                 <Sparkles className="w-3 h-3 text-gold" />
                 <span className="text-gold text-[10px] font-heading font-bold tracking-[0.15em] uppercase">
@@ -199,10 +174,10 @@ const About = () => {
               </div>
             </figure>
             <div className="grid grid-cols-2 gap-3">
-              <img src={servicePreaching.url} alt="Preaching session" className="rounded-xl w-full h-36 object-cover" />
-              <img src={worshipTeam.url} alt="Worship team" className="rounded-xl w-full h-36 object-cover" />
-              <img src={worshipper.url} alt="Worshipper in prayer" className="rounded-xl w-full h-36 object-cover" />
-              <img src={minister.url} alt="Minister on stage" className="rounded-xl w-full h-36 object-cover" />
+              <img src={projectAssetUrl(conferenceTeaching.url)} alt="Conference teaching" className="rounded-xl w-full h-36 object-cover" />
+              <img src={projectAssetUrl(worshipTeam.url)} alt="Worship team" className="rounded-xl w-full h-36 object-cover" />
+              <img src={projectAssetUrl(worshipper.url)} alt="Worshipper in prayer" className="rounded-xl w-full h-36 object-cover" />
+              <img src={projectAssetUrl(minister.url)} alt="Minister on stage" className="rounded-xl w-full h-36 object-cover" />
             </div>
           </div>
         </div>

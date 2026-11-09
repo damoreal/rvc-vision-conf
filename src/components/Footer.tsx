@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import rvcLogo from "@/assets/rvc-logo.png";
 import godhouseLogo from "@/assets/godhouse-logo.png";
@@ -75,11 +75,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2 text-sm text-white/80">
                 <Phone className="w-4 h-4 flex-shrink-0 text-gold" />
-                <span>+234 XXX XXX XXXX</span>
+                <a href="tel:+2349071511079" className="hover:text-gold">+2349071511079</a>
               </li>
               <li className="flex items-center gap-2 text-sm text-white/80">
                 <Mail className="w-4 h-4 flex-shrink-0 text-gold" />
-                <span>info@thegodhouse.org</span>
+                <a href="mailto:info@godhouse.org" className="hover:text-gold">info@godhouse.org</a>
               </li>
             </ul>
           </div>
@@ -91,7 +91,7 @@ const Footer = () => {
             </h3>
             <div className="flex gap-4">
               <a
-                href="https://www.facebook.com/theGodHouseCentre/"
+                href="https://web.facebook.com/theGodHouseCentre"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-gold hover:text-gold-foreground flex items-center justify-center transition-all hover:scale-110"
@@ -100,18 +100,22 @@ const Footer = () => {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/thegodhousecentre/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-gold hover:text-gold-foreground flex items-center justify-center transition-all hover:scale-110"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.youtube.com/@TheGodHouseCentre"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-gold hover:text-gold-foreground flex items-center justify-center transition-all hover:scale-110"
-                aria-label="Twitter"
+                aria-label="YouTube"
               >
-                <Twitter className="w-5 h-5" />
+                <Youtube className="w-5 h-5" />
               </a>
             </div>
             <p className="text-sm text-white/60 mt-6 leading-relaxed">
