@@ -12,17 +12,18 @@ import apostolicImpartation from "@/assets/apostolic_impartation.jpg.asset.json"
 import totalResurrender from "@/assets/total_resurrender.jpg.asset.json";
 import worshipConference from "@/assets/worship_conference.jpg.asset.json";
 import spiritInspiredPrayers from "@/assets/spirit_inspired_prayers.jpg.asset.json";
+import { projectAssetUrl } from "@/lib/utils";
 import worshipperPraying from "@/assets/worshipper-praying.jpg.asset.json";
 import worshipperPraying2 from "@/assets/worshipper-praying-2.jpg.asset.json";
 
 const photos = [
-  { src: conferenceSpeaker.url, caption: "The Word ministered with power" },
-  { src: worshipConference.url, caption: "Worship that fills the room" },
-  { src: apostolicImpartation.url, caption: "Apostolic impartation moments" },
-  { src: worshipperPraying2.url, caption: "Hearts tuned to Heaven" },
-  { src: totalResurrender.url, caption: "Total Resurrender" },
-  { src: worshipperPraying.url, caption: "Deep worship, deep surrender" },
-  { src: spiritInspiredPrayers.url, caption: "Spirit-inspired prayers" },
+  { src: projectAssetUrl(conferenceSpeaker.url), caption: "The Word ministered with power" },
+  { src: projectAssetUrl(worshipConference.url), caption: "Worship that fills the room" },
+  { src: projectAssetUrl(apostolicImpartation.url), caption: "Apostolic impartation moments" },
+  { src: projectAssetUrl(worshipperPraying2.url), caption: "Hearts tuned to Heaven" },
+  { src: projectAssetUrl(totalResurrender.url), caption: "Total Resurrender" },
+  { src: projectAssetUrl(worshipperPraying.url), caption: "Deep worship, deep surrender" },
+  { src: projectAssetUrl(spiritInspiredPrayers.url), caption: "Spirit-inspired prayers" },
 ];
 
 const EventPhotos = () => {

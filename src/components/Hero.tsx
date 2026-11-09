@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, projectAssetUrl } from "@/lib/utils";
 import heroWorship from "@/assets/hero-worship.jpg";
 import stageScene from "@/assets/hero_scene_stage.jpg.asset.json";
 import prayerScene from "@/assets/hero_scene_prayer.jpg.asset.json";
@@ -11,10 +11,10 @@ import ministerScene from "@/assets/hero_scene_minister.jpeg.asset.json";
 
 const heroSlides = [
   { src: heroWorship, alt: "A worshipper lifted in worship" },
-  { src: stageScene.url, alt: "A worship gathering at the conference" },
-  { src: prayerScene.url, alt: "A believer praying at the conference" },
-  { src: prayerCrowdScene.url, alt: "A woman in prayer during worship" },
-  { src: ministerScene.url, alt: "A minister leading a conference session" },
+  { src: projectAssetUrl(stageScene.url), alt: "A worship gathering at the conference" },
+  { src: projectAssetUrl(prayerScene.url), alt: "A believer praying at the conference" },
+  { src: projectAssetUrl(prayerCrowdScene.url), alt: "A woman in prayer during worship" },
+  { src: projectAssetUrl(ministerScene.url), alt: "A minister leading a conference session" },
 ];
 
 interface Ember {
@@ -114,7 +114,7 @@ const Hero = () => {
                   className={cn(
                     "group h-auto w-full justify-start whitespace-normal rounded-none border-l-2 px-3 py-2 text-left font-heading text-sm font-semibold uppercase leading-relaxed transition-all duration-500 sm:px-4 sm:py-3 sm:text-lg",
                     selected
-                      ? "border-gold bg-ink/45 text-gold text-glow-gold"
+                      ? "border-gold bg-ink/45 !text-gold text-glow-gold"
                       : "border-secondary-foreground/30 text-secondary-foreground hover:border-gold/60 hover:bg-ink/30 hover:text-secondary-foreground",
                   )}
                 >

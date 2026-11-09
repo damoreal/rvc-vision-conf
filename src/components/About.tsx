@@ -8,6 +8,7 @@ import worshipper from "@/assets/worshipper-praying.jpg.asset.json";
 import minister from "@/assets/hero_scene_minister.jpeg.asset.json";
 import prayerScene from "@/assets/hero_scene_prayer.jpg.asset.json";
 import flyerAsset from "@/assets/rvc2026-flyer.jpg.asset.json";
+import { projectAssetUrl } from "@/lib/utils";
 
 const stats = [
   { value: "5", label: "Days of Impact" },
@@ -19,28 +20,28 @@ const stats = [
 /* Each collage layer floats at its own depth, reacting to scroll and mouse */
 const layers = [
   {
-    src: conferenceTeaching.url,
+    src: projectAssetUrl(conferenceTeaching.url),
     alt: "A conference teaching session",
     className: "col-span-7 row-span-2",
     depth: 0.55,
     rotate: 0,
   },
   {
-    src: worshipTeam.url,
+    src: projectAssetUrl(worshipTeam.url),
     alt: "Worship team ministering",
     className: "col-span-5 row-span-1",
     depth: 1.0,
     rotate: 0,
   },
   {
-    src: prayerScene.url,
+    src: projectAssetUrl(prayerScene.url),
     alt: "A believer praying at the conference",
     className: "col-span-3 row-span-1",
     depth: 1.5,
     rotate: 0,
   },
   {
-    src: minister.url,
+    src: projectAssetUrl(minister.url),
     alt: "Minister on stage",
     className: "col-span-2 row-span-1",
     depth: 0.8,
@@ -164,7 +165,7 @@ const About = () => {
           {/* Mobile fallback — flyer first, then a simple grid */}
           <div className="sm:hidden space-y-4">
             <figure className="relative rounded-xl overflow-hidden border border-gold/40 shadow-lg">
-              <img src={flyerAsset.url} alt="RVC 2026 Manifestation official flyer" className="w-full" />
+              <img src={projectAssetUrl(flyerAsset.url)} alt="RVC 2026 Manifestation official flyer" className="w-full" />
               <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-ink/80 rounded-full px-3 py-1">
                 <Sparkles className="w-3 h-3 text-gold" />
                 <span className="text-gold text-[10px] font-heading font-bold tracking-[0.15em] uppercase">
@@ -173,10 +174,10 @@ const About = () => {
               </div>
             </figure>
             <div className="grid grid-cols-2 gap-3">
-              <img src={conferenceTeaching.url} alt="Conference teaching" className="rounded-xl w-full h-36 object-cover" />
-              <img src={worshipTeam.url} alt="Worship team" className="rounded-xl w-full h-36 object-cover" />
-              <img src={worshipper.url} alt="Worshipper in prayer" className="rounded-xl w-full h-36 object-cover" />
-              <img src={minister.url} alt="Minister on stage" className="rounded-xl w-full h-36 object-cover" />
+              <img src={projectAssetUrl(conferenceTeaching.url)} alt="Conference teaching" className="rounded-xl w-full h-36 object-cover" />
+              <img src={projectAssetUrl(worshipTeam.url)} alt="Worship team" className="rounded-xl w-full h-36 object-cover" />
+              <img src={projectAssetUrl(worshipper.url)} alt="Worshipper in prayer" className="rounded-xl w-full h-36 object-cover" />
+              <img src={projectAssetUrl(minister.url)} alt="Minister on stage" className="rounded-xl w-full h-36 object-cover" />
             </div>
           </div>
         </div>
