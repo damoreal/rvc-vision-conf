@@ -63,7 +63,7 @@ const EventPhotos = () => {
                   <img
                     src={photo.src}
                     alt={photo.caption}
-                    className="h-[112%] w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                    className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,hsl(170,45%,7%,0.85)_100%)] opacity-80 group-hover:opacity-100 transition-opacity"></div>
                   <div className="absolute bottom-0 inset-x-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">

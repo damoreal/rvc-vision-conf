@@ -111,7 +111,7 @@ const Hero = () => {
                   className={`group h-auto w-full justify-start whitespace-normal rounded-none border-l-2 px-4 py-3 text-left font-heading text-base font-semibold uppercase leading-relaxed transition-all duration-500 sm:text-lg ${
                     selected
                       ? "border-gold bg-ink/45 text-gold text-glow-gold"
-                      : "border-foreground/20 text-foreground/65 hover:border-gold/60 hover:bg-ink/30 hover:text-foreground"
+                      : "border-secondary-foreground/30 text-secondary-foreground/80 hover:border-gold/60 hover:bg-ink/30 hover:text-secondary-foreground"
                   }`}
                 >
                   <span className="mr-3 text-xs text-gold/80">0{index + 1}</span>
@@ -139,12 +139,12 @@ const Hero = () => {
               </p>
             </div>
 
-            <h1 className="font-display select-none leading-[0.82] text-6xl text-foreground text-glow-soft sm:text-8xl xl:text-[10rem]">
+            <h1 className="font-display select-none leading-[0.82] text-6xl text-secondary-foreground text-glow-soft sm:text-8xl xl:text-[10rem]">
               <span className="block intro-reveal" style={{ animationDelay: "0.35s" }}>MANIFES</span>
               <span className="block intro-reveal text-gold text-glow-gold sm:ml-[12%]" style={{ animationDelay: "0.55s" }}>TATION</span>
             </h1>
 
-            <p className="intro-reveal mx-auto mt-7 max-w-2xl font-serif text-lg italic leading-relaxed text-foreground/85 sm:text-xl lg:mx-0" style={{ animationDelay: "0.8s" }}>
+            <p className="intro-reveal mx-auto mt-7 max-w-2xl font-serif text-lg italic leading-relaxed text-secondary-foreground/90 sm:text-xl lg:mx-0" style={{ animationDelay: "0.8s" }}>
               Spirit-inspired teachings and impartation — empowering believers for the work of ministry, until Heaven's reality is made visible.
             </p>
 
@@ -152,7 +152,7 @@ const Hero = () => {
               <Button asChild size="lg" className="rounded-full bg-gold px-10 py-6 font-heading text-lg font-bold text-gold-foreground shadow-gold transition-all hover:scale-105 hover:bg-gold-light">
                 <Link to="/registration">Register Now</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-full border-foreground/30 bg-ink/25 px-10 py-6 font-heading text-lg font-semibold text-foreground transition-all hover:scale-105 hover:bg-foreground/10">
+              <Button asChild size="lg" variant="outline" className="rounded-full border-secondary-foreground/30 bg-ink/25 px-10 py-6 font-heading text-lg font-semibold text-secondary-foreground transition-all hover:scale-105 hover:bg-secondary-foreground/10">
                 <a href="#about">Explore the Conference</a>
               </Button>
             </div>

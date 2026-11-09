@@ -113,7 +113,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-gold hover:text-gold-foreground flex items-center justify-center transition-all hover:scale-110"
-                aria-label="Twitter"
+                aria-label="YouTube"
               >
                 <Youtube className="w-5 h-5" />
               </a>

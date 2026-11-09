@@ -155,7 +155,7 @@ const About = () => {
                 <img
                   src={layer.src}
                   alt={layer.alt}
-                  className="h-[112%] w-full object-cover object-top transition-transform duration-700 hover:scale-[1.03]"
+                  className="h-full w-full object-cover object-top transition-transform duration-700 hover:scale-[1.03]"
                 />
               </figure>
             ))}
