@@ -111,7 +111,7 @@ const Hero = () => {
                   className={`group h-auto w-full justify-start whitespace-normal rounded-none border-l-2 px-3 py-2 text-left font-heading text-sm font-semibold uppercase leading-relaxed transition-all duration-500 sm:px-4 sm:py-3 sm:text-lg ${
                     selected
                       ? "border-gold bg-ink/45 text-gold text-glow-gold"
-                      : "border-secondary-foreground/30 text-secondary-foreground/80 hover:border-gold/60 hover:bg-ink/30 hover:text-secondary-foreground"
+                      : "border-secondary-foreground/30 text-secondary-foreground hover:border-gold/60 hover:bg-ink/30 hover:text-secondary-foreground"
                   }`}
                 >
                   <span className="mr-3 text-xs text-gold/80">0{index + 1}</span>
