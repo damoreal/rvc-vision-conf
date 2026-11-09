@@ -2,16 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 import heroWorship from "@/assets/hero-worship.jpg";
 import stageScene from "@/assets/hero_scene_stage.jpg.asset.json";
 import prayerScene from "@/assets/hero_scene_prayer.jpg.asset.json";
 import prayerCrowdScene from "@/assets/hero_scene_prayer_crowd.jpg.asset.json";
 import ministerScene from "@/assets/hero_scene_minister.jpeg.asset.json";
-import { useEffect, useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const heroSlides = [
   { src: heroWorship, alt: "A worshipper lifted in worship" },
@@ -78,6 +74,7 @@ const Hero = () => {
             )}
           />
         ))}
+        <div className="absolute inset-0 bg-emerald-deep/20"></div>
         <div className="absolute inset-0 bg-ink/30"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/20"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-ink/85"></div>
