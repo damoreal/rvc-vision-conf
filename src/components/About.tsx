@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Radio, Sparkles } from "lucide-react";
-import conferenceTeaching from "@/assets/conference_teaching.jpg.asset.json";
+import conferenceTeaching from "@/assets/conference_teaching_clean.jpg.asset.json";
 import worshipTeam from "@/assets/worship-team.jpg.asset.json";
 import worshipper from "@/assets/worshipper-praying.jpg.asset.json";
 import minister from "@/assets/hero_scene_minister.jpeg.asset.json";
