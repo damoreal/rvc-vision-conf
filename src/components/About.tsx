@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Radio, Sparkles } from "lucide-react";
+import { ArrowRight, Radio } from "lucide-react";
 import conferenceTeaching from "@/assets/conference_teaching_clean.jpg.asset.json";
 import worshipTeam from "@/assets/worship-team.jpg.asset.json";
 import worshipper from "@/assets/worshipper-praying.jpg.asset.json";
 import minister from "@/assets/hero_scene_minister.jpeg.asset.json";
 import prayerScene from "@/assets/hero_scene_prayer.jpg.asset.json";
-import flyerAsset from "@/assets/rvc2026-flyer.jpg.asset.json";
 import { projectAssetUrl } from "@/lib/utils";
 
 const stats = [
@@ -25,6 +24,45 @@ const gridPhotos = [
   { src: projectAssetUrl(minister.url), alt: "Minister on stage", span: "col-span-2" },
   { src: projectAssetUrl(worshipper.url), alt: "Worshipper in prayer", span: "col-span-2" },
 ];
+
+/* Mobile tile: reveals on scroll, colours in while centred on screen, tap to spotlight */
+const MobileTile = ({ src, alt, wide, index, lit, onTap }: { src: string; alt: string; wide: boolean; index: number; lit: boolean; onTap: () => void }) => {
+  const ref = useRef<HTMLButtonElement>(null);
+  const [shown, setShown] = useState(false);
+  const [centred, setCentred] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const reveal = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShown(true); reveal.disconnect(); } }, { threshold: 0.2 });
+    const focus = new IntersectionObserver(([e]) => setCentred(e.isIntersecting), { rootMargin: "-38% 0px -38% 0px" });
+    reveal.observe(el); focus.observe(el);
+    return () => { reveal.disconnect(); focus.disconnect(); };
+  }, []);
+  const colour = lit || centred;
+  return (
+    <button
+      ref={ref}
+      type="button"
+      onClick={onTap}
+      aria-label={alt}
+      style={{ transitionDelay: shown ? `${(index % 2) * 120}ms` : "0ms" }}
+      className={`group relative overflow-hidden aspect-[3/2] ${wide ? "col-span-2" : ""} transition-[clip-path,opacity] duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        shown ? "opacity-100 [clip-path:inset(0_0_0_0)]" : "opacity-0 [clip-path:inset(0_0_100%_0)]"
+      }`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className={`absolute inset-0 h-full w-full object-cover transition-[filter,transform] duration-[900ms] ease-out ${
+          colour ? "grayscale-0 brightness-105 scale-105" : "grayscale brightness-75 scale-100"
+        }`}
+      />
+      <span className={`pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent transition-opacity duration-700 ${colour ? "opacity-0" : "opacity-70"}`} />
+      <span className={`pointer-events-none absolute inset-0 ring-1 ring-inset transition-all duration-500 ${colour ? "ring-gold/70" : "ring-gold/0"}`} />
+    </button>
+  );
+};
 
 const About = () => {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -121,7 +159,7 @@ const About = () => {
       {/* Mobile photo grid — same gap-free mosaic, tap/scroll to colour */}
       <div className="relative mt-16 -mb-24 grid sm:hidden grid-cols-2 bg-ink">
         {gridPhotos.map((p, i) => {
-          const wide = i === 0 || i === 3;
+          const wide = i === 0;
           const lit = active === i;
           return (
             <MobileTile key={p.src} src={p.src} alt={p.alt} wide={wide} index={i} lit={lit} onTap={() => setActive(lit ? null : i)} />
