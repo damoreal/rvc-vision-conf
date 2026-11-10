@@ -159,8 +159,6 @@ const About = () => {
             </div>
           </div>
         </div>
-
-        </div>
       </div>
 
       {/* Desktop/tablet photo grid — full width, gap-free, every photo shown in its landscape frame */}
