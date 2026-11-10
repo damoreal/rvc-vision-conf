@@ -115,25 +115,18 @@ const About = () => {
             ))}
           </div>
 
-          {/* Mobile fallback — flyer first, then a simple grid */}
-          <div className="sm:hidden space-y-4 lg:col-span-2">
-            <figure className="relative rounded-xl overflow-hidden border border-gold/40 shadow-lg">
-              <img src={projectAssetUrl(flyerAsset.url)} alt="RVC 2026 Manifestation official flyer" className="w-full" />
-              <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-ink/80 rounded-full px-3 py-1">
-                <Sparkles className="w-3 h-3 text-gold" />
-                <span className="text-gold text-[10px] font-heading font-bold tracking-[0.15em] uppercase">
-                  Official Flyer
-                </span>
-              </div>
-            </figure>
-            <div className="grid grid-cols-2 gap-3">
-              <img src={projectAssetUrl(conferenceTeaching.url)} alt="Conference teaching" className="rounded-xl w-full h-36 object-cover" />
-              <img src={projectAssetUrl(worshipTeam.url)} alt="Worship team" className="rounded-xl w-full h-36 object-cover" />
-              <img src={projectAssetUrl(worshipper.url)} alt="Worshipper in prayer" className="rounded-xl w-full h-36 object-cover" />
-              <img src={projectAssetUrl(minister.url)} alt="Minister on stage" className="rounded-xl w-full h-36 object-cover" />
-            </div>
-          </div>
         </div>
+      </div>
+
+      {/* Mobile photo grid — same gap-free mosaic, tap/scroll to colour */}
+      <div className="relative mt-16 -mb-24 grid sm:hidden grid-cols-2 bg-ink">
+        {gridPhotos.map((p, i) => {
+          const wide = i === 0 || i === 3;
+          const lit = active === i;
+          return (
+            <MobileTile key={p.src} src={p.src} alt={p.alt} wide={wide} index={i} lit={lit} onTap={() => setActive(lit ? null : i)} />
+          );
+        })}
       </div>
 
       {/* Desktop/tablet photo grid — full width, gap-free, every photo shown in its landscape frame */}

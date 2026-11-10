@@ -57,7 +57,7 @@ const Header = () => {
             <img
               src={rvcLogo}
               alt="RVC Logo"
-              className="h-11 md:h-12 w-auto drop-shadow-md"
+              className="h-7 sm:h-10 md:h-12 w-auto drop-shadow-md"
             />
             <div className="hidden sm:block">
               <div
