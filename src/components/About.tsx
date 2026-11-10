@@ -126,6 +126,20 @@ const About = () => {
             </Button>
           </div>
 
+          {/* Stats — big figures beside the copy, Reboot-style */}
+          <div className="grid grid-cols-2 lg:grid-cols-1 gap-x-8 gap-y-8 lg:border-l lg:border-border lg:pl-12">
+            {stats.map((s) => (
+              <div key={s.label} className="group">
+                <div className="font-display text-5xl md:text-6xl text-accent leading-none transition-colors duration-300 group-hover:text-gold">
+                  {s.value}
+                </div>
+                <div className="mt-2 text-xs font-heading font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
           {/* Mobile fallback — flyer first, then a simple grid */}
           <div className="sm:hidden space-y-4 lg:col-span-2">
             <figure className="relative rounded-xl overflow-hidden border border-gold/40 shadow-lg">
@@ -186,22 +200,6 @@ const About = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 relative">
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 max-w-5xl mx-auto">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="p-6 bg-card rounded-2xl border border-border text-center shadow-sm hover:shadow-lg hover:border-gold/50 transition-all"
-            >
-              <div className="text-4xl font-display text-accent mb-2">{s.value}</div>
-              <div className="text-xs font-heading font-bold uppercase tracking-widest text-muted-foreground">
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 };
