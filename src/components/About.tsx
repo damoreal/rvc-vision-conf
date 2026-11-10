@@ -7,7 +7,6 @@ import worshipTeam from "@/assets/worship-team.jpg.asset.json";
 import worshipper from "@/assets/worshipper-praying.jpg.asset.json";
 import minister from "@/assets/hero_scene_minister.jpeg.asset.json";
 import prayerScene from "@/assets/hero_scene_prayer.jpg.asset.json";
-import stageScene from "@/assets/hero_scene_stage.jpg.asset.json";
 import flyerAsset from "@/assets/rvc2026-flyer.jpg.asset.json";
 import { projectAssetUrl } from "@/lib/utils";
 
@@ -20,12 +19,11 @@ const stats = [
 
 /* Full-bleed photo grid (desktop) — Reboot-style mosaic */
 const gridPhotos = [
-  { src: projectAssetUrl(conferenceTeaching.url), alt: "A conference teaching session", span: "col-span-2" },
-  { src: projectAssetUrl(worshipTeam.url), alt: "Worship team ministering", span: "col-span-1" },
-  { src: projectAssetUrl(prayerScene.url), alt: "A believer praying at the conference", span: "col-span-1" },
-  { src: projectAssetUrl(minister.url), alt: "Minister on stage", span: "col-span-1" },
-  { src: projectAssetUrl(worshipper.url), alt: "Worshipper in prayer", span: "col-span-1" },
-  { src: projectAssetUrl(stageScene.url), alt: "Conference stage in worship", span: "col-span-2" },
+  { src: projectAssetUrl(conferenceTeaching.url), alt: "A conference teaching session", span: "col-span-3" },
+  { src: projectAssetUrl(worshipTeam.url), alt: "Worship team ministering", span: "col-span-3" },
+  { src: projectAssetUrl(prayerScene.url), alt: "A believer praying at the conference", span: "col-span-2" },
+  { src: projectAssetUrl(minister.url), alt: "Minister on stage", span: "col-span-2" },
+  { src: projectAssetUrl(worshipper.url), alt: "Worshipper in prayer", span: "col-span-2" },
 ];
 
 const About = () => {
@@ -141,7 +139,7 @@ const About = () => {
       {/* Desktop/tablet photo grid — full width, gap-free, every photo shown in its landscape frame */}
       <div
         ref={gridRef}
-        className="relative mt-20 hidden sm:grid grid-cols-4 bg-ink"
+        className="relative mt-20 -mb-24 hidden sm:grid grid-cols-6 bg-ink"
         onMouseLeave={() => setActive(null)}
       >
         {gridPhotos.map((p, i) => (
@@ -154,9 +152,7 @@ const About = () => {
               e.currentTarget.style.setProperty("--my", "0px");
             }}
             style={{ transitionDelay: revealed ? `${i * 110}ms` : "0ms" }}
-            className={`group relative overflow-hidden ${p.span} ${
-              p.span === "col-span-2" ? "aspect-[16/9]" : "aspect-[8/9]"
-            } transition-[clip-path,opacity] duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            className={`group relative overflow-hidden ${p.span} aspect-[3/2] transition-[clip-path,opacity] duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
               revealed ? "opacity-100 [clip-path:inset(0_0_0_0)]" : "opacity-0 [clip-path:inset(100%_0_0_0)]"
             }`}
           >
