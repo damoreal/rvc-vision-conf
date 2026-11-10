@@ -55,29 +55,6 @@ const About = () => {
     e.currentTarget.style.setProperty("--my", `${((e.clientY - r.top) / r.height - 0.5) * -14}px`);
   };
 
-  return () => {
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  const handleMouse = (e: React.MouseEvent) => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    setTilt({
-      x: (e.clientX - r.left) / r.width - 0.5,
-      y: (e.clientY - r.top) / r.height - 0.5,
-    });
-  };
-
-  const layerStyle = (depth: number, rotate: number): React.CSSProperties => ({
-    transform: `translate3d(${tilt.x * depth * 36}px, ${
-      scrollProgress * depth * 90 + tilt.y * depth * 28
-    }px, 0) rotate(${rotate}deg)`,
-    willChange: "transform",
-  });
-
   return (
     <section id="about" className="py-24 bg-gradient-section relative overflow-hidden">
       {/* soft emerald wash */}
