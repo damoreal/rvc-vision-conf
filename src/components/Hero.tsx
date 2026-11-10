@@ -152,7 +152,7 @@ const Hero = () => {
               Spirit-inspired teachings and impartation — empowering believers for the work of ministry, until Heaven's reality is made visible.
             </p>
 
-            <div className="intro-reveal mt-6 flex flex-row gap-3 lg:mt-9" style={{ animationDelay: "1.05s" }}>
+            <div className="intro-reveal mt-6 flex flex-row gap-3 lg:mt-9 [&_a]:gap-0" style={{ animationDelay: "1.05s" }}>
               <Button asChild size="lg" className="rounded-full bg-gold px-6 py-5 font-heading text-sm sm:text-base lg:px-10 lg:py-6 lg:text-lg font-bold text-gold-foreground shadow-gold transition-all hover:scale-105 hover:bg-gold-light">
                 <Link to="/registration">Register<span className="hidden lg:inline">&nbsp;Now</span></Link>
               </Button>
