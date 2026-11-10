@@ -63,6 +63,9 @@ const Invite = () => {
   const [name, setName] = useState("");
   const [hasPhoto, setHasPhoto] = useState(false);
   const [, forceDraw] = useState(0);
+  const [zoom, setZoom] = useState(1);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const dragRef = useRef<{ x: number; y: number; ox: number; oy: number } | null>(null);
 
   /* Preload the two logos once */
   useEffect(() => {
@@ -133,13 +136,21 @@ const Invite = () => {
     const px = 96;
     const py = 258;
     const pw = W - px * 2;
-    const ph = 520;
+    const ph = 540;
     ctx.save();
     roundRectPath(ctx, px, py, pw, ph, 22);
     ctx.clip();
     const photo = photoRef.current;
     if (photo) {
-      drawCover(ctx, photo, px, py, pw, ph);
+      const base = Math.max(pw / photo.width, ph / photo.height);
+      const sc = base * zoom;
+      const dw = photo.width * sc;
+      const dh = photo.height * sc;
+      const maxX = (dw - pw) / 2;
+      const maxY = (dh - ph) / 2;
+      const ox = Math.max(-maxX, Math.min(maxX, offset.x));
+      const oy = Math.max(-maxY, Math.min(maxY, offset.y));
+      ctx.drawImage(photo, px + (pw - dw) / 2 + ox, py + (ph - dh) / 2 + oy, dw, dh);
       const fade = ctx.createLinearGradient(0, py + ph * 0.55, 0, py + ph);
       fade.addColorStop(0, "rgba(3,19,15,0)");
       fade.addColorStop(1, "rgba(3,19,15,0.65)");
@@ -202,7 +213,7 @@ const Invite = () => {
     ctx.fillStyle = "rgba(255,255,255,0.5)";
     ctx.font = '500 24px Inter, sans-serif';
     ctx.fillText("Streamed live on Wholeword TV · YouTube · Facebook", W / 2, 1310);
-  }, [name]);
+  }, [name, zoom, offset]);
 
   /* Redraw whenever the photo, name or fonts change */
   useEffect(() => {
@@ -222,6 +233,9 @@ const Invite = () => {
     try {
       const img = await loadImage(url);
       photoRef.current = img;
+      setZoom(1);
+      // Start aligned to the top so faces are not cut off
+      setOffset({ x: 0, y: 99999 });
       setPhotoUrl(url);
       setHasPhoto(true);
       toast.success("Photo added — your invite is ready!");
@@ -229,6 +243,34 @@ const Invite = () => {
       toast.error("That image could not be loaded");
     }
   };
+
+  /* Drag to reposition the photo inside the frame */
+  const toCanvas = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    return { x: ((e.clientX - r.left) / r.width) * W, y: ((e.clientY - r.top) / r.height) * H };
+  };
+  const clampOffset = (o: { x: number; y: number }, z = zoom) => {
+    const photo = photoRef.current;
+    if (!photo) return o;
+    const pw = W - 192, ph = 540;
+    const sc = Math.max(pw / photo.width, ph / photo.height) * z;
+    const mx = (photo.width * sc - pw) / 2, my = (photo.height * sc - ph) / 2;
+    return { x: Math.max(-mx, Math.min(mx, o.x)), y: Math.max(-my, Math.min(my, o.y)) };
+  };
+  const onPointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    if (!hasPhoto) return;
+    const c = toCanvas(e);
+    const o = clampOffset(offset);
+    dragRef.current = { x: c.x, y: c.y, ox: o.x, oy: o.y };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    const d = dragRef.current;
+    if (!d) return;
+    const c = toCanvas(e);
+    setOffset(clampOffset({ x: d.ox + c.x - d.x, y: d.oy + c.y - d.y }));
+  };
+  const onPointerUp = () => { dragRef.current = null; };
 
   const handleDownload = () => {
     const canvas = canvasRef.current;
@@ -362,6 +404,31 @@ const Invite = () => {
                   </Button>
                 </div>
 
+                {hasPhoto && (
+                  <div>
+                    <label htmlFor="invite-zoom" className="block text-sm font-medium mb-2">
+                      Zoom
+                    </label>
+                    <input
+                      id="invite-zoom"
+                      type="range"
+                      min={1}
+                      max={3}
+                      step={0.01}
+                      value={zoom}
+                      onChange={(e) => {
+                        const z = Number(e.target.value);
+                        setZoom(z);
+                        setOffset((o) => clampOffset(o, z));
+                      }}
+                      className="w-full accent-gold"
+                    />
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Drag your photo in the preview to position it perfectly, then download.
+                    </p>
+                  </div>
+                )}
+
                 {!hasPhoto && (
                   <p className="text-sm text-muted-foreground flex items-center gap-2">
                     <Upload className="w-4 h-4 text-gold" />
@@ -394,7 +461,11 @@ const Invite = () => {
                   ref={canvasRef}
                   width={W}
                   height={H}
-                  className="w-full h-auto rounded-2xl"
+                  onPointerDown={onPointerDown}
+                  onPointerMove={onPointerMove}
+                  onPointerUp={onPointerUp}
+                  onPointerCancel={onPointerUp}
+                  className={`w-full h-auto rounded-2xl touch-none ${hasPhoto ? "cursor-grab active:cursor-grabbing" : ""}`}
                   aria-label="Preview of your RVC invite"
                 />
               </div>
