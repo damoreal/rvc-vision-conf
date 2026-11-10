@@ -465,7 +465,7 @@ const Invite = () => {
                   onPointerMove={onPointerMove}
                   onPointerUp={onPointerUp}
                   onPointerCancel={onPointerUp}
-                  className={`w-full h-auto rounded-2xl touch-none ${hasPhoto ? "cursor-grab active:cursor-grabbing" : ""}`}
+                  className={`w-full h-auto rounded-2xl ${hasPhoto ? "touch-none cursor-grab active:cursor-grabbing" : ""}`}
                   aria-label="Preview of your RVC invite"
                 />
               </div>
