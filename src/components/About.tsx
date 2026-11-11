@@ -33,7 +33,7 @@ const MobileTile = ({ src, alt, wide, index, lit, onTap }: { src: string; alt: s
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const reveal = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShown(true); reveal.disconnect(); } }, { threshold: 0.2 });
+    const reveal = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShown(true); reveal.disconnect(); } }, { threshold: 0.01 });
     const focus = new IntersectionObserver(([e]) => setCentred(e.isIntersecting), { rootMargin: "-38% 0px -38% 0px" });
     reveal.observe(el); focus.observe(el);
     return () => { reveal.disconnect(); focus.disconnect(); };
@@ -46,8 +46,8 @@ const MobileTile = ({ src, alt, wide, index, lit, onTap }: { src: string; alt: s
       onClick={onTap}
       aria-label={alt}
       style={{ transitionDelay: shown ? `${(index % 2) * 120}ms` : "0ms" }}
-      className={`group relative overflow-hidden aspect-[3/2] ${wide ? "col-span-2" : ""} transition-[clip-path,opacity] duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        shown ? "opacity-100 [clip-path:inset(0_0_0_0)]" : "opacity-0 [clip-path:inset(0_0_100%_0)]"
+      className={`group relative overflow-hidden aspect-[3/2] ${wide ? "col-span-2" : ""} block w-full p-0 transition-[transform,opacity] duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        shown ? "opacity-100 translate-y-0" : "opacity-60 translate-y-4"
       }`}
     >
       <img
