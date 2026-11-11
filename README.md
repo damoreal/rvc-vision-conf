@@ -1,73 +1,44 @@
-# Welcome to your Lovable project
+# RVC Webpage
 
-## Project info
+I want you to create a conference webpage. The attached image is a guide. Now, I don't want you to follow it exactly, but I want you to use it as a guide concerning the aesthetics.  The Conference titled "Running with the Vision Confence"  (RVC 2025) is done annually, this year's theme is titled "HEAVEN ON EARTH" (This should be largely diplayed on the hero with captivating font styles, like that on the  attached image).
 
-**URL**: https://lovable.dev/projects/a4096f4d-e0d4-4d12-8476-186ad09ad924
+You do not have to use the samecolor as the sample but make it something creative and christian. you can use the color codes of the attached logos (the logos are that of RVC, and The Godhouse Centre).
 
-## How can I edit this code?
+- Retain the FAQ section of the page. Let the speaker arrangement be a flipcard, the first part showcasing Photo, Name, Designation, and the backflip show a button titled "see bio" such that when clicked opens a modal with speaker bio.
 
-There are several ways of editing your application.
+- You can make page have header section: Home, Registration, FAQs, Image Gallery. CDesign the image Gallery section such that participants can upload the event images with a short caption, and also view (and download if necessary) uploaded images of other participants.
 
-**Use Lovable**
+- Indicate Registration button at specific session on the webpage. Registration page details should include:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a4096f4d-e0d4-4d12-8476-186ad09ad924) and start prompting.
+Conference details
+Date: 
+10th - 14th December, 2025
+Time:
+Morning Session: 9am WAT
+Evening Session: 4pm WAT
+Venue:  
+The Godhouse Centre, Warri
+2, Indian Street, off Jakpa Road, by Mansal Hotel, Effurun-Warri, Delta State, Nigeria.
 
-Changes made via Lovable will be committed automatically to this repo.
+This project was built with [Lovable](https://lovable.dev).
 
-**Use your preferred IDE**
+**Live app**: https://rvc-vision-conf.lovable.app
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Build with Lovable
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/a4096f4d-e0d4-4d12-8476-186ad09ad924).
 
-Follow these steps:
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+
+## Development
+
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+git clone <this-repository-url>
+cd <repository-name>
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/a4096f4d-e0d4-4d12-8476-186ad09ad924) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
