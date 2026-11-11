@@ -6,14 +6,14 @@ const platforms = [
     name: "Wholeword TV",
     description: "The official media arm of The Godhouse Centre — every session streamed live and in full.",
     icon: Tv,
-    href: "https://www.wholewordtv.com",
-    cta: "Watch on Wholeword TV",
+    href: "https://wholeword.app/app/tv",
+    cta: "Watch on Wholeword App",
   },
   {
     name: "YouTube",
     description: "Subscribe to The Godhouse Centre channel and join the sessions live from anywhere in the world.",
     icon: Youtube,
-    href: "https://www.youtube.com/results?search_query=the+godhouse+centre",
+    href: "https://www.youtube.com/@TheGodHouseCentre",
     cta: "Watch on YouTube",
   },
   {

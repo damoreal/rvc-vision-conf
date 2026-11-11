@@ -76,10 +76,9 @@ const Registration = () => {
     // Simulate API call
     setTimeout(() => {
       console.log(values);
-      toast.success("Registration successful! Check your email for confirmation.");
       setIsSubmitting(false);
       form.reset();
-      navigate("/");
+      navigate("/registration/success", { state: { name: (values as any).fullName ?? (values as any).name } });
     }, 2000);
   }
 
