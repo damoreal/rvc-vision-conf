@@ -29,7 +29,7 @@ const faqs = [
   {
     question: "What is the registration fee?",
     answer:
-      "Registration details and fees are on the registration page. Early bird discounts are available, and group registrations qualify for special rates.",
+      "There is no registration fee for RVC 2026 — attendance is completely free. However, every participant must register, as it helps us document attendance and prepare adequately for you. Registration takes just a minute and ensures you don't miss any session.",
   },
   {
     question: "Will there be accommodation arrangements?",
