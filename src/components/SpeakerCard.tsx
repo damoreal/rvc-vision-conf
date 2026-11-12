@@ -66,7 +66,7 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
             <img
               src={speaker.photo}
               alt={speaker.name}
-              className="w-full h-72 object-cover rounded-xl mb-4"
+              className="w-full h-80 object-cover object-top rounded-xl mb-4"
             />
             <p className="text-foreground leading-relaxed">{speaker.bio}</p>
           </div>
