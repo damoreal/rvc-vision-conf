@@ -10,6 +10,15 @@ import godhouseLogo from "@/assets/godhouse-logo.png";
 
 const W = 1080;
 const H = 1350;
+const PS = 580; // square photo size
+const PX = (W - PS) / 2;
+const PY = 236;
+
+type Design = "emerald" | "ivory";
+const DESIGNS: Record<Design, { label: string; bg: [string, string, string]; band?: string; text: string; soft: string; muted: string; gold: string; goldLight: string; fade: string }> = {
+  emerald: { label: "Emerald Night", bg: ["#0d3129", "#062018", "#03130f"], text: "rgba(255,255,255,0.88)", soft: "rgba(255,255,255,0.8)", muted: "rgba(255,255,255,0.5)", gold: "#e9b44c", goldLight: "#f5d78e", fade: "3,19,15" },
+  ivory: { label: "Ivory Gold", bg: ["#fbf6ea", "#f5ecd6", "#efe2c2"], band: "#0b2a22", text: "#0b2a22", soft: "rgba(11,42,34,0.85)", muted: "rgba(11,42,34,0.6)", gold: "#b8862b", goldLight: "#f5d78e", fade: "11,42,34" },
+};
 
 const loadImage = (src: string) =>
   new Promise<HTMLImageElement>((resolve, reject) => {
@@ -61,6 +70,7 @@ const Invite = () => {
   const logosRef = useRef<{ rvc?: HTMLImageElement; godhouse?: HTMLImageElement }>({});
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [name, setName] = useState("");
+  const [design, setDesign] = useState<Design>("emerald");
   const [hasPhoto, setHasPhoto] = useState(false);
   const [, forceDraw] = useState(0);
   const [zoom, setZoom] = useState(1);
@@ -90,11 +100,16 @@ const Invite = () => {
 
     /* ---- Background: deep teal night with a gold bloom ---- */
     const bg = ctx.createLinearGradient(0, 0, 0, H);
-    bg.addColorStop(0, "#0d3129");
-    bg.addColorStop(0.55, "#062018");
-    bg.addColorStop(1, "#03130f");
+    const D = DESIGNS[design];
+    bg.addColorStop(0, D.bg[0]);
+    bg.addColorStop(0.55, D.bg[1]);
+    bg.addColorStop(1, D.bg[2]);
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
+    if (D.band) {
+      ctx.fillStyle = D.band;
+      ctx.fillRect(0, 0, W, PY + PS / 2);
+    }
 
     const bloom = ctx.createRadialGradient(W * 0.85, H * 0.08, 0, W * 0.85, H * 0.08, W * 0.75);
     bloom.addColorStop(0, "rgba(233,180,76,0.16)");
@@ -133,10 +148,10 @@ const Invite = () => {
     try { ctx.letterSpacing = "0px"; } catch { /* noop */ }
 
     /* ---- Photo window ---- */
-    const px = 96;
-    const py = 258;
-    const pw = W - px * 2;
-    const ph = 540;
+    const px = PX;
+    const py = PY;
+    const pw = PS;
+    const ph = PS;
     ctx.save();
     roundRectPath(ctx, px, py, pw, ph, 22);
     ctx.clip();
@@ -152,8 +167,8 @@ const Invite = () => {
       const oy = Math.max(-maxY, Math.min(maxY, offset.y));
       ctx.drawImage(photo, px + (pw - dw) / 2 + ox, py + (ph - dh) / 2 + oy, dw, dh);
       const fade = ctx.createLinearGradient(0, py + ph * 0.55, 0, py + ph);
-      fade.addColorStop(0, "rgba(3,19,15,0)");
-      fade.addColorStop(1, "rgba(3,19,15,0.65)");
+      fade.addColorStop(0, `rgba(${D.fade},0)`);
+      fade.addColorStop(1, `rgba(${D.fade},0.45)`);
       ctx.fillStyle = fade;
       ctx.fillRect(px, py, pw, ph);
     } else {
@@ -172,48 +187,48 @@ const Invite = () => {
     ctx.stroke();
 
     /* ---- Headline ---- */
-    ctx.fillStyle = "rgba(255,255,255,0.88)";
+    ctx.fillStyle = D.text;
     ctx.font = '600 40px Inter, sans-serif';
     try { ctx.letterSpacing = "18px"; } catch { /* noop */ }
-    ctx.fillText("I AM", W / 2, 868);
+    ctx.fillText("I AM", W / 2, 884);
     try { ctx.letterSpacing = "0px"; } catch { /* noop */ }
 
     ctx.shadowColor = "rgba(233,180,76,0.55)";
     ctx.shadowBlur = 36;
-    ctx.fillStyle = "#e9b44c";
+    ctx.fillStyle = D.gold;
     ctx.font = '150px Anton, sans-serif';
-    ctx.fillText("RVC-BOUND", W / 2, 1006);
+    ctx.fillText("RVC-BOUND", W / 2, 1012);
     ctx.shadowBlur = 0;
 
     if (name.trim()) {
-      ctx.fillStyle = "rgba(255,255,255,0.8)";
+      ctx.fillStyle = D.soft;
       ctx.font = 'italic 700 40px "Playfair Display", serif';
       ctx.fillText(name.trim(), W / 2, 1064);
     }
 
     /* Gold divider */
-    ctx.fillStyle = "#e9b44c";
+    ctx.fillStyle = D.gold;
     ctx.fillRect(W / 2 - 120, name.trim() ? 1098 : 1064, 240, 4);
 
     /* ---- Theme, date, venue ---- */
-    ctx.fillStyle = "rgba(255,255,255,0.85)";
+    ctx.fillStyle = D.text;
     ctx.font = '800 32px Montserrat, sans-serif';
     try { ctx.letterSpacing = "10px"; } catch { /* noop */ }
     ctx.fillText("THEME · MANIFESTATION", W / 2, 1158);
     try { ctx.letterSpacing = "0px"; } catch { /* noop */ }
 
-    ctx.fillStyle = "#f5d78e";
+    ctx.fillStyle = design === "ivory" ? D.gold : D.goldLight;
     ctx.font = '800 38px Inter, sans-serif';
     ctx.fillText("9TH – 13TH DEC, 2026  |  9AM & 4PM WAT", W / 2, 1216);
 
-    ctx.fillStyle = "rgba(255,255,255,0.8)";
+    ctx.fillStyle = D.soft;
     ctx.font = '500 30px Inter, sans-serif';
     ctx.fillText("The Godhouse Centre, Warri", W / 2, 1262);
 
-    ctx.fillStyle = "rgba(255,255,255,0.5)";
+    ctx.fillStyle = D.muted;
     ctx.font = '500 24px Inter, sans-serif';
     ctx.fillText("Streamed live on Wholeword TV · YouTube · Facebook", W / 2, 1310);
-  }, [name, zoom, offset]);
+  }, [name, zoom, offset, design]);
 
   /* Redraw whenever the photo, name or fonts change */
   useEffect(() => {
@@ -252,7 +267,7 @@ const Invite = () => {
   const clampOffset = (o: { x: number; y: number }, z = zoom) => {
     const photo = photoRef.current;
     if (!photo) return o;
-    const pw = W - 192, ph = 540;
+    const pw = PS, ph = PS;
     const sc = Math.max(pw / photo.width, ph / photo.height) * z;
     const mx = (photo.width * sc - pw) / 2, my = (photo.height * sc - ph) / 2;
     return { x: Math.max(-mx, Math.min(mx, o.x)), y: Math.max(-my, Math.min(my, o.y)) };
@@ -382,6 +397,27 @@ const Invite = () => {
                     onChange={(e) => setName(e.target.value)}
                     maxLength={40}
                   />
+                </div>
+
+                <div>
+                  <p className="block text-sm font-medium mb-2">Invite Design</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    {(Object.keys(DESIGNS) as Design[]).map((d) => (
+                      <button
+                        key={d}
+                        type="button"
+                        onClick={() => setDesign(d)}
+                        aria-pressed={design === d}
+                        className={`rounded-2xl border-2 p-3 text-left transition ${design === d ? "border-gold shadow-gold" : "border-border hover:border-gold/50"}`}
+                      >
+                        <span
+                          className="block h-10 rounded-lg mb-2"
+                          style={{ background: `linear-gradient(135deg, ${DESIGNS[d].bg[0]}, ${DESIGNS[d].band ?? DESIGNS[d].bg[2]})`, boxShadow: `inset 0 0 0 2px ${DESIGNS[d].gold}` }}
+                        />
+                        <span className="text-sm font-heading font-semibold">{DESIGNS[d].label}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
