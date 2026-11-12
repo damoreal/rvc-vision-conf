@@ -98,6 +98,93 @@ const Invite = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    if (design === "ivory") {
+      const ink = "#0b2a22", gold = "#b8862b";
+      /* Ivory paper with soft gold vignette */
+      ctx.fillStyle = "#fbf6ea";
+      ctx.fillRect(0, 0, W, H);
+      const vg = ctx.createRadialGradient(W / 2, H / 2, W * 0.3, W / 2, H / 2, W * 0.9);
+      vg.addColorStop(0, "rgba(233,180,76,0)");
+      vg.addColorStop(1, "rgba(233,180,76,0.22)");
+      ctx.fillStyle = vg;
+      ctx.fillRect(0, 0, W, H);
+      /* Diagonal pinstripes */
+      ctx.save();
+      ctx.strokeStyle = "rgba(184,134,43,0.08)";
+      ctx.lineWidth = 2;
+      for (let i = -H; i < W; i += 28) { ctx.beginPath(); ctx.moveTo(i, H); ctx.lineTo(i + H, 0); ctx.stroke(); }
+      ctx.restore();
+      /* Double gold border */
+      ctx.strokeStyle = gold; ctx.lineWidth = 4; ctx.strokeRect(30, 30, W - 60, H - 60);
+      ctx.lineWidth = 1.5; ctx.strokeRect(44, 44, W - 88, H - 88);
+      /* Dark header ribbon with logos */
+      ctx.fillStyle = ink;
+      roundRectPath(ctx, 70, 66, W - 140, 120, 60);
+      ctx.fill();
+      const { rvc, godhouse } = logosRef.current;
+      const lh = 76;
+      if (rvc) ctx.drawImage(rvc, 110, 88, (lh * rvc.width) / rvc.height, lh);
+      if (godhouse) { const lw = (lh * godhouse.width) / godhouse.height; ctx.drawImage(godhouse, W - 110 - lw, 88, lw, lh); }
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#f5d78e";
+      ctx.font = '700 20px Montserrat, sans-serif';
+      try { ctx.letterSpacing = "5px"; } catch { /* noop */ }
+      ctx.fillText("RUNNING WITH THE", W / 2, 120);
+      ctx.fillText("VISION CONFERENCE", W / 2, 150);
+      try { ctx.letterSpacing = "0px"; } catch { /* noop */ }
+      /* Polaroid-style white card */
+      ctx.save();
+      ctx.shadowColor = "rgba(11,42,34,0.3)"; ctx.shadowBlur = 40; ctx.shadowOffsetY = 14;
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(PX - 22, PY - 22, PS + 44, PS + 44);
+      ctx.restore();
+      ctx.save();
+      ctx.beginPath(); ctx.rect(PX, PY, PS, PS); ctx.clip();
+      const photo = photoRef.current;
+      if (photo) {
+        const sc = Math.max(PS / photo.width, PS / photo.height) * zoom;
+        const dw = photo.width * sc, dh = photo.height * sc;
+        const mx = (dw - PS) / 2, my = (dh - PS) / 2;
+        const ox = Math.max(-mx, Math.min(mx, offset.x)), oy = Math.max(-my, Math.min(my, offset.y));
+        ctx.drawImage(photo, PX + (PS - dw) / 2 + ox, PY + (PS - dh) / 2 + oy, dw, dh);
+      } else {
+        ctx.fillStyle = "#efe2c2"; ctx.fillRect(PX, PY, PS, PS);
+        ctx.fillStyle = "rgba(11,42,34,0.45)"; ctx.font = '600 32px Inter, sans-serif';
+        ctx.fillText("YOUR PHOTO GOES HERE", W / 2, PY + PS / 2);
+      }
+      ctx.restore();
+      /* Gold seal badge on the photo corner */
+      ctx.fillStyle = gold;
+      ctx.beginPath(); ctx.arc(PX + PS + 6, PY + PS + 6, 62, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#fbf6ea"; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(PX + PS + 6, PY + PS + 6, 52, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = "#ffffff"; ctx.font = '30px Anton, sans-serif';
+      ctx.fillText("2026", PX + PS + 6, PY + PS + 18);
+      /* Text block */
+      ctx.fillStyle = ink;
+      ctx.font = 'italic 700 46px "Playfair Display", serif';
+      ctx.fillText("I am", W / 2, 920);
+      ctx.fillStyle = ink;
+      ctx.font = '140px Anton, sans-serif';
+      ctx.fillText("RVC-BOUND", W / 2, 1050);
+      let y = 1050;
+      if (name.trim()) {
+        ctx.fillStyle = gold; ctx.font = 'italic 700 38px "Playfair Display", serif';
+        y = 1102; ctx.fillText(name.trim(), W / 2, y);
+      }
+      ctx.fillStyle = ink;
+      roundRectPath(ctx, W / 2 - 250, y + 26, 500, 56, 28); ctx.fill();
+      ctx.fillStyle = "#f5d78e"; ctx.font = '800 26px Montserrat, sans-serif';
+      try { ctx.letterSpacing = "8px"; } catch { /* noop */ }
+      ctx.fillText("MANIFESTATION", W / 2, y + 64);
+      try { ctx.letterSpacing = "0px"; } catch { /* noop */ }
+      ctx.fillStyle = ink; ctx.font = '800 32px Inter, sans-serif';
+      ctx.fillText("9TH – 13TH DEC, 2026  ·  9AM & 4PM WAT", W / 2, y + 128);
+      ctx.fillStyle = "rgba(11,42,34,0.7)"; ctx.font = '500 26px Inter, sans-serif';
+      ctx.fillText("The Godhouse Centre, Warri  ·  Live on Wholeword TV, YouTube, Facebook", W / 2, y + 170);
+      return;
+    }
+
     /* ---- Background: deep teal night with a gold bloom ---- */
     const bg = ctx.createLinearGradient(0, 0, 0, H);
     const D = DESIGNS[design];
