@@ -304,7 +304,7 @@ const Invite = () => {
     ctx.fillText("THEME · MANIFESTATION", W / 2, 1158);
     try { ctx.letterSpacing = "0px"; } catch { /* noop */ }
 
-    ctx.fillStyle = design === "ivory" ? D.gold : D.goldLight;
+    ctx.fillStyle = D.goldLight;
     ctx.font = '800 38px Inter, sans-serif';
     ctx.fillText("9TH – 13TH DEC, 2026  |  9AM & 4PM WAT", W / 2, 1216);
 
