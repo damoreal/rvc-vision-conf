@@ -2,9 +2,9 @@
 
 ## RVC 2026 registration
 
-The form sends a JSON `POST` to `/api/rvc/register/` on the existing Django site. It sends the attendee's name, email, phone, city, church affiliation, attendance type, and accommodation choice where applicable. Django saves valid submissions and returns a readable message. Validation errors include field messages, and repeat submissions return a readable conflict message. Confirmation email is pending the approved HTML template.
+The form sends a JSON `POST` to `/api/rvc/register/` on the existing Django site. It sends the attendee's name, email, phone, city, church affiliation, attendance type, and accommodation choice where applicable. Django saves valid submissions and sends the RVC 2026 confirmation using its configured mail backend. The success page shows the email notice when the backend accepts the message. Validation errors include field messages, and repeat submissions return a readable conflict message. A mail error leaves the registration saved.
 
-For local development, run Django at `http://localhost:8000` with `DJANGO_DEBUG=True` and set `VITE_RVC_API_BASE_URL=http://localhost:8000/api/rvc` in the frontend's `.env.local` before running `npm run dev`.
+For local development, run Django at `http://localhost:8000` with `DJANGO_DEBUG=True` and `EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend`. Set `VITE_RVC_API_BASE_URL=http://localhost:8000/api/rvc` in the frontend's `.env.local` before running `npm run dev`.
 
 ### Namecheap and Cloudflare
 
