@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -20,40 +20,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Calendar, Clock, MapPin, Wifi } from "lucide-react";
+import { RegistrationRequestError, submitRegistration, type RegistrationData } from "@/lib/api";
 
 const formSchema = z.object({
-  firstName: z.string().min(2, "First name must be at least 2 characters").max(50),
-  lastName: z.string().min(2, "Last name must be at least 2 characters").max(50),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  city: z.string().min(2, "City/Location is required").max(100),
+  firstName: z.string().trim().min(1, "Enter your first name").max(100),
+  lastName: z.string().trim().min(1, "Enter your last name").max(100),
+  email: z.string().trim().email("Invalid email address").max(254),
+  phone: z.string().trim().max(20).refine(
+    (value) => /^\+?[\d(). -]+$/.test(value) && value.replace(/\D/g, "").length >= 10,
+    "Enter a valid phone number with at least 10 digits",
+  ),
+  city: z.string().trim().min(1, "City/Location is required").max(100),
   churchType: z.enum(["Godhouse", "Others"]),
-  godhouseCentre: z.string().optional(),
-  otherChurch: z.string().optional(),
+  godhouseCentre: z.string().trim().max(150).optional(),
+  otherChurch: z.string().trim().optional(),
   attendanceType: z.enum(["Physical", "Virtual"]),
   accommodation: z.enum(["yes", "no"]),
-}).refine((data) => {
-  if (data.churchType === "Godhouse") {
-    return !!data.godhouseCentre;
+}).superRefine((data, context) => {
+  const field = data.churchType === "Godhouse" ? "godhouseCentre" : "otherChurch";
+  if (!data[field]) {
+    context.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: [field],
+      message: data.churchType === "Godhouse" ? "Select your centre" : "Enter your church name",
+    });
+  } else if (data[field].length > 150) {
+    context.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: [field],
+      message: "Use 150 characters or fewer",
+    });
   }
-  if (data.churchType === "Others") {
-    return !!data.otherChurch;
-  }
-  return true;
-}, {
-  message: "Please select your centre or enter your church name",
-  path: ["churchType"],
 });
 
 const Registration = () => {
   const navigate = useNavigate();
+  const posting = useRef(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState("");
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<RegistrationData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
@@ -71,15 +80,36 @@ const Registration = () => {
 
   const watchChurchType = form.watch("churchType");
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: RegistrationData) {
+    if (posting.current) return;
+    posting.current = true;
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      console.log(values);
+    setSubmissionError("");
+    try {
+      const result = await submitRegistration(values);
+      navigate("/registration/success", {
+        replace: true,
+        state: {
+          firstName: values.firstName,
+          message: result.message,
+          confirmationEmailSent: result.confirmation_email_sent,
+        },
+      });
+    } catch (error) {
+      if (error instanceof RegistrationRequestError) {
+        for (const [field, messages] of Object.entries(error.fields)) {
+          if (Object.prototype.hasOwnProperty.call(values, field) && Array.isArray(messages) && typeof messages[0] === "string") {
+            form.setError(field as keyof RegistrationData, { type: "server", message: messages[0] });
+          }
+        }
+        setSubmissionError(error.message);
+      } else {
+        setSubmissionError("We could not confirm your registration. Please try again.");
+      }
+    } finally {
+      posting.current = false;
       setIsSubmitting(false);
-      form.reset();
-      navigate("/registration/success", { state: { name: (values as any).fullName ?? (values as any).name } });
-    }, 2000);
+    }
   }
 
   return (
@@ -291,7 +321,7 @@ const Registration = () => {
                       <FormItem>
                         <FormLabel>Church Name *</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your church name" {...field} />
+                          <Input placeholder="Enter your church name" maxLength={150} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -343,6 +373,9 @@ const Registration = () => {
                   )}
                 />
 
+                {submissionError && (
+                  <p role="alert" className="text-sm font-medium text-destructive">{submissionError}</p>
+                )}
                 <Button
                   type="submit"
                   className="w-full rounded-full bg-gold text-gold-foreground hover:bg-gold/90 font-heading font-bold text-lg py-6 shadow-gold"

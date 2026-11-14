@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Home, Sparkles, ArrowRight, Check } from "lucide-react";
 import hero from "@/assets/hero-worship.jpg";
 
@@ -10,7 +10,12 @@ const AppleIcon = () => (
 );
 
 const RegistrationSuccess = () => {
-  const name = (useLocation().state as { name?: string } | null)?.name;
+  const state = useLocation().state as { firstName?: string; message?: string; confirmationEmailSent?: boolean } | null;
+  if (typeof state?.message !== "string" || typeof state.confirmationEmailSent !== "boolean") {
+    return <Navigate to="/registration" replace />;
+  }
+
+  const { firstName, message, confirmationEmailSent } = state;
   return (
     <main className="relative min-h-screen bg-ink text-secondary-foreground overflow-hidden">
       <img src={hero} alt="" className="absolute inset-0 w-full h-full object-cover opacity-25 ken-burns" />
@@ -31,14 +36,18 @@ const RegistrationSuccess = () => {
           <Check className="w-10 h-10 text-gold-foreground" strokeWidth={3} />
         </div>
         <p className="intro-reveal text-gold font-heading font-bold text-xs tracking-[0.3em] uppercase mb-3" style={{ animationDelay: "120ms" }}>
-          Congratulations{name ? `, ${name.split(" ")[0]}` : ""}
+          Congratulations{firstName ? `, ${firstName}` : ""}
         </p>
         <h1 className="intro-reveal font-display uppercase text-5xl sm:text-7xl leading-[0.95] mb-4" style={{ animationDelay: "220ms" }}>
           You're <span className="text-gold text-glow-gold">RVC-bound</span>
         </h1>
-        <p className="intro-reveal text-secondary-foreground/70 mb-12" style={{ animationDelay: "320ms" }}>
+        <p className="intro-reveal text-secondary-foreground/70 mb-3" style={{ animationDelay: "320ms" }}>
           Manifestation · 9th–13th December 2026 · The Godhouse Centre, Warri
         </p>
+        <div role="status" className="intro-reveal text-secondary-foreground/90 mb-12" style={{ animationDelay: "360ms" }}>
+          <p>{message}</p>
+          {confirmationEmailSent && <p>A confirmation email was sent.</p>}
+        </div>
 
         <div className="grid sm:grid-cols-2 gap-5 text-left">
           <Link to="/invite" className="intro-reveal group glass-dark rounded-3xl p-7 hover:border-gold/60 transition-all hover:-translate-y-1" style={{ animationDelay: "450ms" }}>
