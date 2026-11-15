@@ -25,11 +25,12 @@ import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Calendar, Clock, MapPin, Wifi } from "lucide-react";
+import { isNoEmailKeyword, isValidEmailOrKeyword } from "@/lib/emailBypass";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters").max(50),
   lastName: z.string().min(2, "Last name must be at least 2 characters").max(50),
-  email: z.string().email("Invalid email address"),
+  email: z.string().refine(isValidEmailOrKeyword, "Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   city: z.string().min(2, "City/Location is required").max(100),
   churchType: z.enum(["Godhouse", "Others"]),
@@ -74,9 +75,16 @@ const Registration = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    const { error } = await supabase.functions.invoke("send-registration-email", {
-      body: { firstName: values.firstName, lastName: values.lastName, email: values.email },
-    });
+    const noEmail = isNoEmailKeyword(values.email);
+    // Registration record should store email as null when the desk keyword is used.
+    const registration = { ...values, email: noEmail ? null : values.email.trim() };
+    void registration;
+    let error: unknown = null;
+    if (!noEmail) {
+      ({ error } = await supabase.functions.invoke("send-registration-email", {
+        body: { firstName: values.firstName, lastName: values.lastName, email: registration.email },
+      }));
+    }
     setIsSubmitting(false);
     if (error) {
       console.error(error);
@@ -196,8 +204,11 @@ const Registration = () => {
                     <FormItem>
                       <FormLabel>Email Address *</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="john.doe@example.com" {...field} />
+                        <Input type="text" inputMode="email" autoComplete="email" placeholder="john.doe@example.com" {...field} />
                       </FormControl>
+                      {isNoEmailKeyword(field.value ?? "") && (
+                        <p className="text-xs text-muted-foreground">On-site registration: no confirmation email will be sent.</p>
+                      )}
                       <FormMessage />
                     </FormItem>
                   )}
