@@ -21,7 +21,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Calendar, Clock, MapPin, Wifi } from "lucide-react";
@@ -81,9 +80,16 @@ const Registration = () => {
     void registration;
     let error: unknown = null;
     if (!noEmail) {
-      ({ error } = await supabase.functions.invoke("send-registration-email", {
-        body: { firstName: values.firstName, lastName: values.lastName, email: registration.email },
-      }));
+      try {
+        const res = await fetch("/api/send-registration-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ firstName: values.firstName, lastName: values.lastName, email: registration.email }),
+        });
+        if (!res.ok) error = new Error(`Email request failed (${res.status})`);
+      } catch (e) {
+        error = e;
+      }
     }
     setIsSubmitting(false);
     if (error) {
