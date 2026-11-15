@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Calendar, Clock, MapPin, Wifi } from "lucide-react";
@@ -71,15 +72,18 @@ const Registration = () => {
 
   const watchChurchType = form.watch("churchType");
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      console.log(values);
-      setIsSubmitting(false);
-      form.reset();
-      navigate("/registration/success", { state: { name: (values as any).fullName ?? (values as any).name } });
-    }, 2000);
+    const { error } = await supabase.functions.invoke("send-registration-email", {
+      body: { firstName: values.firstName, lastName: values.lastName, email: values.email },
+    });
+    setIsSubmitting(false);
+    if (error) {
+      console.error(error);
+      toast.error("You're registered, but we couldn't send your confirmation email.");
+    }
+    form.reset();
+    navigate("/registration/success", { state: { name: values.firstName } });
   }
 
   return (
