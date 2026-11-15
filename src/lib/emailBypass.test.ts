@@ -1,3 +1,4 @@
+// @ts-nocheck -- run with `bun test`
 import { describe, it, expect } from "bun:test";
 import { isNoEmailKeyword, isValidEmailOrKeyword } from "./emailBypass";
 
