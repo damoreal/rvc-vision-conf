@@ -1,6 +1,6 @@
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Home, Sparkles, ArrowRight, Check } from "lucide-react";
-import hero from "@/assets/hero-worship.jpg";
+import hero from "@/assets/hero-worship.webp";
 
 const PlayIcon = () => (
   <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor" aria-hidden><path d="M3.6 1.8 13.8 12 3.6 22.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1Zm11.3 11.3 2.4 2.4-11.2 6.4 8.8-8.8Zm3.6-3.4 2.6 1.5c.8.5.8 1.6 0 2.1l-2.6 1.5-2.7-2.8 2.7-2.3ZM6.1 2.1l11.2 6.4-2.4 2.4-8.8-8.8Z"/></svg>

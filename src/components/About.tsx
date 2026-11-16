@@ -2,17 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Radio } from "lucide-react";
-import conferenceTeaching from "@/assets/conference_teaching_clean.jpg";
-import worshipTeam from "@/assets/worship-team.jpg";
-import worshipper from "@/assets/worshipper-praying.jpg";
-import minister from "@/assets/hero_scene_minister.jpeg";
-import prayerScene from "@/assets/hero_scene_prayer.jpg";
+import conferenceTeaching from "@/assets/conference_teaching_clean.webp";
+import worshipTeam from "@/assets/worship-team.webp";
+import worshipper from "@/assets/worshipper-praying.webp";
+import minister from "@/assets/hero_scene_minister.webp";
+import prayerScene from "@/assets/hero_scene_prayer.webp";
 
 const stats = [
   { value: "5", label: "Days of Impact" },
   { value: "8", label: "Sessions" },
   { value: "3", label: "Live Platforms" },
-  { value: "1000+", label: "Believers Expected" },
+  { value: "5000+", label: "Believers Expected" },
 ];
 
 /* Full-bleed photo grid (desktop) — Reboot-style mosaic */

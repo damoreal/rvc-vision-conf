@@ -1,6 +1,6 @@
 import SpeakerCard from "./SpeakerCard";
-import philipsPhoto from "@/assets/apostle-td-philips.jpg";
-import pistisPhoto from "@/assets/pst-theo-pistis-danjuma.jpg";
+import philipsPhoto from "@/assets/apostle-td-philips.webp";
+import pistisPhoto from "@/assets/pst-theo-pistis-danjuma.webp";
 
 const speakers = [
   {
@@ -32,8 +32,8 @@ const Speakers = () => {
           </h2>
           <div className="h-1 w-24 bg-gradient-gold mx-auto mb-6 rounded-full"></div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Pastor T.D. and Pastor Theo'Pistis Danjuma welcome you to RVC 2026 — spirit-inspired
-            teaching, impartation and fresh vision
+            Apostle T.D. Philips and Pastor Theo'Pistis Danjuma welcome you to RVC 2026. Get ready for
+            spirit-inspired teachings, impartations and a fresh vision. The Spirit says come!
           </p>
         </div>
 

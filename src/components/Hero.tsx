@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import heroWorship from "@/assets/hero-worship.jpg";
-import stageScene from "@/assets/hero_scene_stage.jpg";
-import prayerScene from "@/assets/hero_scene_prayer.jpg";
-import prayerCrowdScene from "@/assets/hero_scene_prayer_crowd.jpg";
-import ministerScene from "@/assets/hero_scene_minister.jpeg";
+import heroWorship from "@/assets/hero-worship.webp";
+import stageScene from "@/assets/hero_scene_stage.webp";
+import prayerScene from "@/assets/hero_scene_prayer.webp";
+import prayerCrowdScene from "@/assets/hero_scene_prayer_crowd.webp";
+import ministerScene from "@/assets/hero_scene_minister.webp";
 
 const heroSlides = [
   { src: heroWorship, alt: "A worshipper lifted in worship" },
@@ -72,8 +72,8 @@ const Hero = () => {
             fetchPriority={index === 0 ? "high" : "low"}
             loading="eager"
             className={cn(
-              "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1400ms] ease-in-out",
-              activeSlide === index ? "opacity-100 ken-burns" : "opacity-0",
+              "absolute inset-0 h-full w-full object-cover object-center ken-burns transition-opacity duration-[2600ms] ease-[cubic-bezier(0.45,0,0.55,1)] will-change-[opacity,transform]",
+              activeSlide === index ? "opacity-100 z-[1]" : "opacity-0 z-0",
             )}
           />
         ))}
