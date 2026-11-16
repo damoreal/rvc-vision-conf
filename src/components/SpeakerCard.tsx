@@ -59,27 +59,29 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
 
       {/* Bio Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-2xl max-h-[85svh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="font-serif text-2xl font-bold">{speaker.name}</DialogTitle>
-            <p className="text-muted-foreground">{speaker.designation}</p>
-          </DialogHeader>
-          <div className="mt-2">
+        <DialogContent className="max-w-3xl max-h-[85svh] overflow-y-auto">
+          <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-start">
             <img
               loading="lazy"
               decoding="async"
               src={speaker.photo}
               alt={speaker.name}
-              className="w-full h-56 sm:h-80 object-cover object-top rounded-xl mb-4"
+              className="w-48 sm:w-56 md:w-full mx-auto aspect-[3/4] object-cover object-top rounded-xl"
             />
-            <p className="text-foreground leading-relaxed">{speaker.bio}</p>
+            <div>
+              <DialogHeader>
+                <DialogTitle className="font-serif text-2xl font-bold">{speaker.name}</DialogTitle>
+                <p className="text-muted-foreground">{speaker.designation}</p>
+              </DialogHeader>
+              <p className="mt-4 text-foreground leading-relaxed">{speaker.bio}</p>
+              <Button
+                asChild
+                className="mt-6 rounded-full bg-gold text-gold-foreground hover:bg-gold/90 font-heading font-bold"
+              >
+                <a href="/registration">Register for RVC 2026</a>
+              </Button>
+            </div>
           </div>
-          <Button
-            asChild
-            className="mt-4 rounded-full bg-gold text-gold-foreground hover:bg-gold/90 font-heading font-bold"
-          >
-            <a href="/registration">Register for RVC 2026</a>
-          </Button>
         </DialogContent>
       </Dialog>
     </>
