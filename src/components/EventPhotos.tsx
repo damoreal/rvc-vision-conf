@@ -7,13 +7,13 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Camera } from "lucide-react";
-import conferenceSpeaker from "@/assets/conference_speaker.jpeg";
-import apostolicImpartation from "@/assets/apostolic_impartation.jpg";
-import totalResurrender from "@/assets/total_resurrender.jpg";
-import worshipConference from "@/assets/worship_conference.jpg";
-import spiritInspiredPrayers from "@/assets/spirit_inspired_prayers.jpg";
-import worshipperPraying from "@/assets/worshipper-praying.jpg";
-import worshipperPraying2 from "@/assets/worshipper-praying-2.jpg";
+import conferenceSpeaker from "@/assets/conference_speaker.webp";
+import apostolicImpartation from "@/assets/apostolic_impartation.webp";
+import totalResurrender from "@/assets/total_resurrender.webp";
+import worshipConference from "@/assets/worship_conference.webp";
+import spiritInspiredPrayers from "@/assets/spirit_inspired_prayers.webp";
+import worshipperPraying from "@/assets/worshipper-praying.webp";
+import worshipperPraying2 from "@/assets/worshipper-praying-2.webp";
 
 const photos = [
   { src: conferenceSpeaker, caption: "The Word ministered with power" },
