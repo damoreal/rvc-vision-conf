@@ -68,6 +68,9 @@ const Hero = () => {
             src={slide.src}
             alt={slide.alt}
             aria-hidden="true"
+            decoding="async"
+            fetchPriority={index === 0 ? "high" : "low"}
+            loading="eager"
             className={cn(
               "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1400ms] ease-in-out",
               activeSlide === index ? "opacity-100 ken-burns" : "opacity-0",

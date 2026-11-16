@@ -30,6 +30,8 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
       >
         {/* Portrait photo */}
         <img
+          loading="lazy"
+          decoding="async"
           src={speaker.photo}
           alt={speaker.name}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -64,6 +66,8 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
           </DialogHeader>
           <div className="mt-2">
             <img
+              loading="lazy"
+              decoding="async"
               src={speaker.photo}
               alt={speaker.name}
               className="w-full h-80 object-cover object-top rounded-xl mb-4"

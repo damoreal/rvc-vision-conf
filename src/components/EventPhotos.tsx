@@ -61,6 +61,8 @@ const EventPhotos = () => {
               <CarouselItem key={index} className="pl-3 md:basis-1/2 lg:basis-1/3">
                 <div className="group relative h-80 overflow-hidden rounded-sm border border-border shadow-lg transition-all duration-500 hover:shadow-gold">
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={photo.src}
                     alt={photo.caption}
                     className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
