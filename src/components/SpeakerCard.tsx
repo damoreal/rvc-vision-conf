@@ -30,7 +30,7 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
       >
         {/* Portrait photo */}
         <img
-          loading="lazy"
+          loading="eager"
           decoding="async"
           src={speaker.photo}
           alt={speaker.name}
@@ -62,7 +62,7 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
         <DialogContent className="max-w-3xl max-h-[85svh] overflow-y-auto">
           <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-start">
             <img
-              loading="lazy"
+              loading="eager"
               decoding="async"
               src={speaker.photo}
               alt={speaker.name}
