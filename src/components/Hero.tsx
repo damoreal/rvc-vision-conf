@@ -2,19 +2,19 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
-import { cn, projectAssetUrl } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import heroWorship from "@/assets/hero-worship.jpg";
-import stageScene from "@/assets/hero_scene_stage.jpg.asset.json";
-import prayerScene from "@/assets/hero_scene_prayer.jpg.asset.json";
-import prayerCrowdScene from "@/assets/hero_scene_prayer_crowd.jpg.asset.json";
-import ministerScene from "@/assets/hero_scene_minister.jpeg.asset.json";
+import stageScene from "@/assets/hero_scene_stage.jpg";
+import prayerScene from "@/assets/hero_scene_prayer.jpg";
+import prayerCrowdScene from "@/assets/hero_scene_prayer_crowd.jpg";
+import ministerScene from "@/assets/hero_scene_minister.jpeg";
 
 const heroSlides = [
   { src: heroWorship, alt: "A worshipper lifted in worship" },
-  { src: projectAssetUrl(stageScene.url), alt: "A worship gathering at the conference" },
-  { src: projectAssetUrl(prayerScene.url), alt: "A believer praying at the conference" },
-  { src: projectAssetUrl(prayerCrowdScene.url), alt: "A woman in prayer during worship" },
-  { src: projectAssetUrl(ministerScene.url), alt: "A minister leading a conference session" },
+  { src: stageScene, alt: "A worship gathering at the conference" },
+  { src: prayerScene, alt: "A believer praying at the conference" },
+  { src: prayerCrowdScene, alt: "A woman in prayer during worship" },
+  { src: ministerScene, alt: "A minister leading a conference session" },
 ];
 
 interface Ember {

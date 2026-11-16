@@ -222,7 +222,7 @@ const Registration = () => {
                     <FormItem>
                       <FormLabel>Email Address *</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="john.doe@example.com" {...field} />
+                        <Input type="email" autoComplete="email" placeholder="john.doe@example.com" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -302,6 +302,7 @@ const Registration = () => {
                             <SelectItem value="Jeddo">Jeddo</SelectItem>
                             <SelectItem value="Asaba">Asaba</SelectItem>
                             <SelectItem value="Bonny Island">Bonny Island</SelectItem>
+                            <SelectItem value="Ojo">Ojo</SelectItem>
                             <SelectItem value="Ecclesia USA">Ecclesia USA</SelectItem>
                             <SelectItem value="Ecclesia UK">Ecclesia UK</SelectItem>
                             <SelectItem value="Ecclesia Canada">Ecclesia Canada</SelectItem>

@@ -1,19 +1,18 @@
 import SpeakerCard from "./SpeakerCard";
-import { projectAssetUrl } from "@/lib/utils";
-import philipsPhoto from "@/assets/apostle-td-philips.jpg.asset.json";
-import pistisPhoto from "@/assets/pst-theo-pistis-danjuma.jpg.asset.json";
+import philipsPhoto from "@/assets/apostle-td-philips.jpg";
+import pistisPhoto from "@/assets/pst-theo-pistis-danjuma.jpg";
 
 const speakers = [
   {
     name: "Apostle T.D. Philips",
     designation: "Senior Pastor, The Godhouse Centre",
-    photo: projectAssetUrl(philipsPhoto.url),
+    photo: philipsPhoto,
     bio: "Apostle Theophilus Danjuma Philips is a dynamic teacher of God's Word, driven by a divine vision to bring the Gospel to every corner of the globe. His ministry is marked by miraculous signs, healings, and the empowering gifts of the Holy Spirit. He leads Godhouse Missions International, headquartered in Warri, Delta State, Nigeria, alongside his wife, Theo'Pistis Danjuma, both deeply passionate about the transformative power of God's Word.",
   },
   {
     name: "Pst. Theo'Pistis Danjuma",
     designation: "Senior Pastor, The Godhouse Centre, Warri",
-    photo: projectAssetUrl(pistisPhoto.url),
+    photo: pistisPhoto,
     bio: "Pastor Theo'Pistis Danjuma, the Lead Pastor of Godhouse Centre, Warri, is a passionate and insightful teacher of God's Word. Renowned as a passionate teacher of God's word, life coach and counselor, she empowers individuals through the transformative wisdom found in the Scriptures. Her leadership fosters spiritual growth and offers guidance, inspiring positive change in the lives of many.",
   },
 ];

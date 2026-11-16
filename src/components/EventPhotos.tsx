@@ -7,23 +7,22 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Camera } from "lucide-react";
-import conferenceSpeaker from "@/assets/conference_speaker.jpeg.asset.json";
-import apostolicImpartation from "@/assets/apostolic_impartation.jpg.asset.json";
-import totalResurrender from "@/assets/total_resurrender.jpg.asset.json";
-import worshipConference from "@/assets/worship_conference.jpg.asset.json";
-import spiritInspiredPrayers from "@/assets/spirit_inspired_prayers.jpg.asset.json";
-import { projectAssetUrl } from "@/lib/utils";
-import worshipperPraying from "@/assets/worshipper-praying.jpg.asset.json";
-import worshipperPraying2 from "@/assets/worshipper-praying-2.jpg.asset.json";
+import conferenceSpeaker from "@/assets/conference_speaker.jpeg";
+import apostolicImpartation from "@/assets/apostolic_impartation.jpg";
+import totalResurrender from "@/assets/total_resurrender.jpg";
+import worshipConference from "@/assets/worship_conference.jpg";
+import spiritInspiredPrayers from "@/assets/spirit_inspired_prayers.jpg";
+import worshipperPraying from "@/assets/worshipper-praying.jpg";
+import worshipperPraying2 from "@/assets/worshipper-praying-2.jpg";
 
 const photos = [
-  { src: projectAssetUrl(conferenceSpeaker.url), caption: "The Word ministered with power" },
-  { src: projectAssetUrl(worshipConference.url), caption: "Worship that fills the room" },
-  { src: projectAssetUrl(apostolicImpartation.url), caption: "Apostolic impartation moments" },
-  { src: projectAssetUrl(worshipperPraying2.url), caption: "Hearts tuned to Heaven" },
-  { src: projectAssetUrl(totalResurrender.url), caption: "Total Resurrender" },
-  { src: projectAssetUrl(worshipperPraying.url), caption: "Deep worship, deep surrender" },
-  { src: projectAssetUrl(spiritInspiredPrayers.url), caption: "Spirit-inspired prayers" },
+  { src: conferenceSpeaker, caption: "The Word ministered with power" },
+  { src: worshipConference, caption: "Worship that fills the room" },
+  { src: apostolicImpartation, caption: "Apostolic impartation moments" },
+  { src: worshipperPraying2, caption: "Hearts tuned to Heaven" },
+  { src: totalResurrender, caption: "Total Resurrender" },
+  { src: worshipperPraying, caption: "Deep worship, deep surrender" },
+  { src: spiritInspiredPrayers, caption: "Spirit-inspired prayers" },
 ];
 
 const EventPhotos = () => {

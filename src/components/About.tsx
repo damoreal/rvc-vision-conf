@@ -2,12 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Radio } from "lucide-react";
-import conferenceTeaching from "@/assets/conference_teaching_clean.jpg.asset.json";
-import worshipTeam from "@/assets/worship-team.jpg.asset.json";
-import worshipper from "@/assets/worshipper-praying.jpg.asset.json";
-import minister from "@/assets/hero_scene_minister.jpeg.asset.json";
-import prayerScene from "@/assets/hero_scene_prayer.jpg.asset.json";
-import { projectAssetUrl } from "@/lib/utils";
+import conferenceTeaching from "@/assets/conference_teaching_clean.jpg";
+import worshipTeam from "@/assets/worship-team.jpg";
+import worshipper from "@/assets/worshipper-praying.jpg";
+import minister from "@/assets/hero_scene_minister.jpeg";
+import prayerScene from "@/assets/hero_scene_prayer.jpg";
 
 const stats = [
   { value: "5", label: "Days of Impact" },
@@ -18,11 +17,11 @@ const stats = [
 
 /* Full-bleed photo grid (desktop) — Reboot-style mosaic */
 const gridPhotos = [
-  { src: projectAssetUrl(conferenceTeaching.url), alt: "A conference teaching session", span: "col-span-3" },
-  { src: projectAssetUrl(worshipTeam.url), alt: "Worship team ministering", span: "col-span-3" },
-  { src: projectAssetUrl(prayerScene.url), alt: "A believer praying at the conference", span: "col-span-2" },
-  { src: projectAssetUrl(minister.url), alt: "Minister on stage", span: "col-span-2" },
-  { src: projectAssetUrl(worshipper.url), alt: "Worshipper in prayer", span: "col-span-2" },
+  { src: conferenceTeaching, alt: "A conference teaching session", span: "col-span-3" },
+  { src: worshipTeam, alt: "Worship team ministering", span: "col-span-3" },
+  { src: prayerScene, alt: "A believer praying at the conference", span: "col-span-2" },
+  { src: minister, alt: "Minister on stage", span: "col-span-2" },
+  { src: worshipper, alt: "Worshipper in prayer", span: "col-span-2" },
 ];
 
 /* Mobile tile: reveals on scroll, colours in while centred on screen, tap to spotlight */
