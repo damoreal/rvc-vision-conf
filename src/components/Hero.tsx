@@ -77,10 +77,10 @@ const Hero = () => {
             )}
           />
         ))}
-        <div className="absolute inset-0 bg-emerald-deep/20"></div>
-        <div className="absolute inset-0 bg-ink/30"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/20"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-ink/85"></div>
+        <div className="absolute inset-0 z-[2] bg-emerald-deep/20"></div>
+        <div className="absolute inset-0 z-[2] bg-ink/30"></div>
+        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-ink via-ink/75 to-ink/20"></div>
+        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-ink/30 via-transparent to-ink/85"></div>
       </div>
 
       {/* Floating embers */}

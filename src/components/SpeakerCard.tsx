@@ -59,7 +59,7 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
 
       {/* Bio Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl max-h-[85svh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="font-serif text-2xl font-bold">{speaker.name}</DialogTitle>
             <p className="text-muted-foreground">{speaker.designation}</p>
@@ -70,7 +70,7 @@ const SpeakerCard = ({ speaker }: SpeakerCardProps) => {
               decoding="async"
               src={speaker.photo}
               alt={speaker.name}
-              className="w-full h-80 object-cover object-top rounded-xl mb-4"
+              className="w-full h-56 sm:h-80 object-cover object-top rounded-xl mb-4"
             />
             <p className="text-foreground leading-relaxed">{speaker.bio}</p>
           </div>
