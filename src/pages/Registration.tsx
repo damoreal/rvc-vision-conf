@@ -90,12 +90,26 @@ const Registration = () => {
       const email = values.email ?? "";
       const noEmail = isNoEmailKeyword(email);
       const result = await submitRegistration({ ...values, email: noEmail ? null : email.trim() });
+      let emailSent = result.confirmation_email_sent;
+      if (!noEmail && !emailSent) {
+        try {
+          const res = await fetch("/api/send-registration-email", {
+            method: "POST",
+            keepalive: true,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ firstName: values.firstName, lastName: values.lastName, email: email.trim() }),
+          });
+          emailSent = res.ok;
+        } catch {
+          emailSent = false;
+        }
+      }
       navigate("/registration/success", {
         replace: true,
         state: {
           firstName: values.firstName,
           message: result.message,
-          confirmationEmailSent: result.confirmation_email_sent,
+          confirmationEmailSent: emailSent,
         },
       });
     } catch (error) {
