@@ -23,12 +23,13 @@ import {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Calendar, Clock, MapPin, Wifi } from "lucide-react";
+import { isNoEmailKeyword, isValidEmailOrKeyword } from "@/lib/emailBypass";
 import { RegistrationRequestError, submitRegistration, type RegistrationData } from "@/lib/api";
 
 const formSchema = z.object({
   firstName: z.string().trim().min(1, "Enter your first name").max(100),
   lastName: z.string().trim().min(1, "Enter your last name").max(100),
-  email: z.string().trim().email("Invalid email address").max(254),
+  email: z.string().trim().max(254).refine(isValidEmailOrKeyword, "Invalid email address"),
   phone: z.string().trim().max(20).refine(
     (value) => /^\+?[\d(). -]+$/.test(value) && value.replace(/\D/g, "").length >= 10,
     "Enter a valid phone number with at least 10 digits",
@@ -86,7 +87,9 @@ const Registration = () => {
     setIsSubmitting(true);
     setSubmissionError("");
     try {
-      const result = await submitRegistration(values);
+      const email = values.email ?? "";
+      const noEmail = isNoEmailKeyword(email);
+      const result = await submitRegistration({ ...values, email: noEmail ? null : email.trim() });
       navigate("/registration/success", {
         replace: true,
         state: {
@@ -222,8 +225,11 @@ const Registration = () => {
                     <FormItem>
                       <FormLabel>Email Address *</FormLabel>
                       <FormControl>
-                        <Input type="email" autoComplete="email" placeholder="john.doe@example.com" {...field} />
+                        <Input type="text" inputMode="email" autoComplete="email" placeholder="john.doe@example.com" {...field} />
                       </FormControl>
+                      {isNoEmailKeyword(field.value ?? "") && (
+                        <p className="text-xs text-muted-foreground">On-site registration: no confirmation email will be sent.</p>
+                      )}
                       <FormMessage />
                     </FormItem>
                   )}

@@ -1,7 +1,7 @@
 export interface RegistrationData {
   firstName: string;
   lastName: string;
-  email: string;
+  email: string | null;
   phone: string;
   city: string;
   churchType: "Godhouse" | "Others";
