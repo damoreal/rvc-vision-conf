@@ -90,8 +90,8 @@ const Registration = () => {
       const email = values.email ?? "";
       const noEmail = isNoEmailKeyword(email);
       const result = await submitRegistration({ ...values, email: noEmail ? null : email.trim() });
-      let emailSent = result.confirmation_email_sent;
-      if (!noEmail && !emailSent) {
+      let emailSent = false;
+      if (!noEmail) {
         try {
           const res = await fetch("/api/send-registration-email", {
             method: "POST",
