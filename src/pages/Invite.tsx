@@ -115,6 +115,18 @@ const Invite = () => {
       ctx.lineWidth = 2;
       for (let i = -H; i < W; i += 28) { ctx.beginPath(); ctx.moveTo(i, H); ctx.lineTo(i + H, 0); ctx.stroke(); }
       ctx.restore();
+      /* Manifestation watermark in warm gold */
+      const artW = logosRef.current.art;
+      if (artW) {
+        const aS = W * 0.95, ax = (W - aS) / 2, ay = H * 0.5 - aS / 2;
+        ctx.save();
+        ctx.globalAlpha = 0.13;
+        ctx.globalCompositeOperation = "multiply";
+        ctx.filter = "sepia(1) saturate(1.4) brightness(1.15)";
+        ctx.beginPath(); ctx.arc(W / 2, ay + aS / 2, aS / 2, 0, Math.PI * 2); ctx.clip();
+        ctx.drawImage(artW, ax, ay, aS, aS);
+        ctx.restore();
+      }
       /* Double gold border */
       ctx.strokeStyle = gold; ctx.lineWidth = 4; ctx.strokeRect(30, 30, W - 60, H - 60);
       ctx.lineWidth = 1.5; ctx.strokeRect(44, 44, W - 88, H - 88);
@@ -154,13 +166,24 @@ const Invite = () => {
         ctx.fillText("YOUR PHOTO GOES HERE", W / 2, PY + PS / 2);
       }
       ctx.restore();
-      /* Gold seal badge on the photo corner */
-      ctx.fillStyle = gold;
-      ctx.beginPath(); ctx.arc(PX + PS + 6, PY + PS + 6, 62, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = "#fbf6ea"; ctx.lineWidth = 3;
-      ctx.beginPath(); ctx.arc(PX + PS + 6, PY + PS + 6, 52, 0, Math.PI * 2); ctx.stroke();
-      ctx.fillStyle = "#ffffff"; ctx.font = '30px Anton, sans-serif';
-      ctx.fillText("2026", PX + PS + 6, PY + PS + 18);
+      /* Gold-rimmed Manifestation medallion on the photo corner */
+      {
+        const cx = PX + PS + 6, cy = PY + PS + 6, r = 74;
+        ctx.save();
+        ctx.shadowColor = "rgba(11,42,34,0.35)"; ctx.shadowBlur = 24; ctx.shadowOffsetY = 8;
+        ctx.fillStyle = gold; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+        ctx.fillStyle = "#f5d78e"; ctx.beginPath(); ctx.arc(cx, cy, r - 6, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = gold; ctx.beginPath(); ctx.arc(cx, cy, r - 10, 0, Math.PI * 2); ctx.fill();
+        const artM = logosRef.current.art;
+        ctx.save();
+        ctx.beginPath(); ctx.arc(cx, cy, r - 14, 0, Math.PI * 2); ctx.clip();
+        if (artM) { const d = (r - 14) * 2.3; ctx.drawImage(artM, cx - d / 2, cy - d / 2, d, d); }
+        else { ctx.fillStyle = ink; ctx.fillRect(cx - r, cy - r, r * 2, r * 2); }
+        ctx.restore();
+        ctx.strokeStyle = "#fbf6ea"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(cx, cy, r - 14, 0, Math.PI * 2); ctx.stroke();
+      }
       /* Text block */
       ctx.fillStyle = ink;
       ctx.font = 'italic 700 46px "Playfair Display", serif';
