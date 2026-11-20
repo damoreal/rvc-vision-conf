@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import manifestArt from "@/assets/manifestation.webp";
 import { Calendar, Clock, MapPin, Wifi } from "lucide-react";
 import { isNoEmailKeyword, isValidEmailOrKeyword } from "@/lib/emailBypass";
 import { RegistrationRequestError, submitRegistration, type RegistrationData } from "@/lib/api";
@@ -120,7 +121,9 @@ const Registration = () => {
 
       {/* Dark intro banner */}
       <div className="relative bg-ink overflow-hidden pt-28 pb-16">
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <div className="absolute inset-0 flex items-start justify-center overflow-hidden"><img src={manifestArt} alt="" className="shrink-0 w-[max(100%,48rem)] aspect-square object-cover opacity-80 ken-burns [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" /></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/25 to-ink/90" />
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl breathe-gold"></div>
           <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-gold/10 rounded-full blur-3xl breathe-gold"></div>
         </div>

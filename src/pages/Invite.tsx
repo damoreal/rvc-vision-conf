@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { Upload, Download, Share2, Wand2, ShieldCheck } from "lucide-react";
 import rvcLogo from "@/assets/rvc-logo.png";
 import godhouseLogo from "@/assets/godhouse-logo.png";
+import manifestArt from "@/assets/manifestation.webp";
 
 const W = 1080;
 const H = 1350;
@@ -67,21 +68,21 @@ const Invite = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const photoRef = useRef<HTMLImageElement | null>(null);
   const objectUrlRef = useRef<string | null>(null);
-  const logosRef = useRef<{ rvc?: HTMLImageElement; godhouse?: HTMLImageElement }>({});
+  const logosRef = useRef<{ rvc?: HTMLImageElement; godhouse?: HTMLImageElement; art?: HTMLImageElement }>({});
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [design, setDesign] = useState<Design>("emerald");
   const [hasPhoto, setHasPhoto] = useState(false);
-  const [, forceDraw] = useState(0);
+  const [drawTick, forceDraw] = useState(0);
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const dragRef = useRef<{ x: number; y: number; ox: number; oy: number } | null>(null);
 
   /* Preload the two logos once */
   useEffect(() => {
-    Promise.all([loadImage(rvcLogo), loadImage(godhouseLogo)])
-      .then(([rvc, godhouse]) => {
-        logosRef.current = { rvc, godhouse };
+    Promise.all([loadImage(rvcLogo), loadImage(godhouseLogo), loadImage(manifestArt).catch(() => undefined)])
+      .then(([rvc, godhouse, art]) => {
+        logosRef.current = { rvc, godhouse, art };
         forceDraw((t) => t + 1);
       })
       .catch(() => undefined);
@@ -204,6 +205,27 @@ const Invite = () => {
     ctx.fillStyle = bloom;
     ctx.fillRect(0, 0, W, H);
 
+    /* ---- Manifestation artwork: radiant backdrop behind the photo ---- */
+    const art = logosRef.current.art;
+    if (art) {
+      const aS = W * 1.05;
+      const ax = (W - aS) / 2;
+      const ay = PY + PS / 2 - aS / 2;
+      ctx.save();
+      ctx.globalAlpha = 0.55;
+      ctx.globalCompositeOperation = "screen";
+      ctx.drawImage(art, ax, ay, aS, aS);
+      ctx.restore();
+      const fadeTop = ctx.createLinearGradient(0, 0, 0, H);
+      fadeTop.addColorStop(0, D.bg[0]);
+      fadeTop.addColorStop(0.12, "rgba(13,49,41,0)");
+      fadeTop.addColorStop(0.62, "rgba(6,32,24,0)");
+      fadeTop.addColorStop(0.8, "rgba(3,19,15,0.92)");
+      fadeTop.addColorStop(1, D.bg[2]);
+      ctx.fillStyle = fadeTop;
+      ctx.fillRect(0, 0, W, H);
+    }
+
     /* Fine gold ornament lines */
     ctx.strokeStyle = "rgba(233,180,76,0.25)";
     ctx.lineWidth = 2;
@@ -320,7 +342,7 @@ const Invite = () => {
   /* Redraw whenever the photo, name or fonts change */
   useEffect(() => {
     drawInvite();
-  }, [drawInvite, photoUrl, hasPhoto]);
+  }, [drawInvite, photoUrl, hasPhoto, drawTick]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

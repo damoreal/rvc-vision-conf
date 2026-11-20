@@ -1,6 +1,6 @@
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Home, Sparkles, ArrowRight, Check } from "lucide-react";
-import hero from "@/assets/hero-worship.webp";
+import manifestArt from "@/assets/manifestation.webp";
 
 const PlayIcon = () => (
   <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor" aria-hidden><path d="M3.6 1.8 13.8 12 3.6 22.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1Zm11.3 11.3 2.4 2.4-11.2 6.4 8.8-8.8Zm3.6-3.4 2.6 1.5c.8.5.8 1.6 0 2.1l-2.6 1.5-2.7-2.8 2.7-2.3ZM6.1 2.1l11.2 6.4-2.4 2.4-8.8-8.8Z"/></svg>
@@ -23,9 +23,11 @@ const RegistrationSuccess = () => {
   const { firstName, message, confirmationEmailSent, confirmationEmailError } = state;
   return (
     <main className="relative min-h-screen bg-ink text-secondary-foreground overflow-hidden">
-      <img src={hero} alt="" className="absolute inset-0 w-full h-full object-cover opacity-25 ken-burns" />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/85 to-ink" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[32rem] h-[32rem] rounded-full bg-gold/10 blur-3xl breathe-gold" />
+      <div className="absolute inset-x-0 top-0 flex justify-center pointer-events-none" aria-hidden>
+        <img src={manifestArt} alt="" className="w-[min(140vw,62rem)] aspect-square object-cover opacity-70 ken-burns [mask-image:radial-gradient(circle_at_center,black_35%,transparent_70%)]" />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/75 to-ink" />
+      <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-[28rem] h-[28rem] rounded-full bg-gold/15 blur-3xl breathe-gold" />
 
       <nav className="relative z-10 container mx-auto px-4 py-5 flex justify-between gap-3">
         <Link to="/registration" className="glass-light rounded-full px-4 py-2 text-sm font-heading font-semibold inline-flex items-center gap-2 hover:border-gold transition-colors">
