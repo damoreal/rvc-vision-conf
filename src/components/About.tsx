@@ -7,6 +7,7 @@ import worshipTeam from "@/assets/worship-team.webp";
 import worshipper from "@/assets/worshipper-praying.webp";
 import minister from "@/assets/hero_scene_minister.webp";
 import prayerScene from "@/assets/hero_scene_prayer.webp";
+import silhouette from "@/assets/manifestation-silhouette.webp";
 
 const stats = [
   { value: "5", label: "Days of Impact" },
@@ -139,9 +140,10 @@ const About = () => {
           </div>
 
           {/* Stats — big figures beside the copy, Reboot-style */}
-          <div className="grid grid-cols-2 lg:grid-cols-1 gap-x-8 gap-y-8 lg:border-l lg:border-border lg:pl-12">
+          <div className="relative grid grid-cols-2 lg:grid-cols-1 gap-x-8 gap-y-8 lg:border-l lg:border-border lg:pl-12">
+            <img src={silhouette} alt="" aria-hidden className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] lg:w-auto lg:h-[115%] max-w-none opacity-[0.09] lg:left-[62%]" />
             {stats.map((s) => (
-              <div key={s.label} className="group">
+              <div key={s.label} className="group relative">
                 <div className="font-display text-5xl md:text-6xl text-accent leading-none transition-colors duration-300 group-hover:text-gold">
                   {s.value}
                 </div>
