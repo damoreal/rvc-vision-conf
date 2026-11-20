@@ -10,12 +10,17 @@ const AppleIcon = () => (
 );
 
 const RegistrationSuccess = () => {
-  const state = useLocation().state as { firstName?: string; message?: string; confirmationEmailSent?: boolean } | null;
+  const state = useLocation().state as {
+    firstName?: string;
+    message?: string;
+    confirmationEmailSent?: boolean;
+    confirmationEmailError?: string;
+  } | null;
   if (typeof state?.message !== "string" || typeof state.confirmationEmailSent !== "boolean") {
     return <Navigate to="/registration" replace />;
   }
 
-  const { firstName, message, confirmationEmailSent } = state;
+  const { firstName, message, confirmationEmailSent, confirmationEmailError } = state;
   return (
     <main className="relative min-h-screen bg-ink text-secondary-foreground overflow-hidden">
       <img src={hero} alt="" className="absolute inset-0 w-full h-full object-cover opacity-25 ken-burns" />
@@ -46,7 +51,8 @@ const RegistrationSuccess = () => {
         </p>
         <div role="status" className="intro-reveal text-secondary-foreground/90 mb-12" style={{ animationDelay: "360ms" }}>
           <p>{message}</p>
-          {confirmationEmailSent && <p>A confirmation email was sent.</p>}
+          {confirmationEmailSent && <p>Your confirmation email was accepted for delivery.</p>}
+          {confirmationEmailError && <p>{confirmationEmailError}</p>}
         </div>
 
         <div className="grid sm:grid-cols-2 gap-5 text-left">
