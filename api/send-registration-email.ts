@@ -1,5 +1,5 @@
-import { TEMPLATE } from "./_template";
-import { isNoEmailKeyword } from "../src/lib/emailBypass";
+import { TEMPLATE } from "./_template.js";
+import { isNoEmailKeyword } from "../src/lib/emailBypass.js";
 
 interface ApiRequest {
   method?: string;
