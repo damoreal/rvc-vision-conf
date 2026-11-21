@@ -208,6 +208,16 @@ luminous gold accents, ivory light sections. */
     }
   }
 
+  /* Soft bloom for the hero glow, timed with the title reveal */
+  .glow-bloom {
+    opacity: 0;
+    animation: glow-bloom 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
+  }
+  @keyframes glow-bloom {
+    from { opacity: 0; filter: blur(24px); transform: translate(-50%, -50%) scale(0.88); }
+    to { opacity: 1; filter: blur(0); transform: translate(-50%, -50%) scale(1); }
+  }
+
   /* Intro reveal: rises and fades in on page load */
   .intro-reveal {
     opacity: 0;

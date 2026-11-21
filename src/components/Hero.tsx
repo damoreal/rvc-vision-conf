@@ -10,12 +10,12 @@ import prayerCrowdScene from "@/assets/hero_scene_prayer_crowd.webp";
 import ministerScene from "@/assets/hero_scene_minister.webp";
 import manifestArt from "@/assets/manifestation.webp";
 
-const heroSlides = [
+const heroSlides: { src: string; alt: string; pos?: string }[] = [
   { src: heroWorship, alt: "A worshipper lifted in worship" },
-  { src: stageScene, alt: "A worship gathering at the conference" },
-  { src: prayerScene, alt: "A believer praying at the conference" },
+  { src: stageScene, alt: "A worship gathering at the conference", pos: "object-[56%_50%] sm:object-center" },
+  { src: prayerScene, alt: "A believer praying at the conference", pos: "object-[30%_40%] sm:object-center" },
   { src: prayerCrowdScene, alt: "A woman in prayer during worship" },
-  { src: ministerScene, alt: "A minister leading a conference session" },
+  { src: ministerScene, alt: "A minister leading a conference session", pos: "object-[58%_50%] sm:object-center" },
 ];
 
 interface Ember {
@@ -73,7 +73,8 @@ const Hero = () => {
             fetchPriority={index === 0 ? "high" : "low"}
             loading="eager"
             className={cn(
-              "absolute inset-0 h-full w-full object-cover object-center ken-burns transition-opacity duration-[2600ms] ease-[cubic-bezier(0.45,0,0.55,1)] will-change-[opacity,transform]",
+              "absolute inset-0 h-full w-full object-cover ken-burns transition-opacity duration-[2600ms] ease-[cubic-bezier(0.45,0,0.55,1)] will-change-[opacity,transform]",
+              slide.pos ?? "object-center",
               activeSlide === index ? "opacity-100 z-[1]" : "opacity-0 z-0",
             )}
           />
@@ -143,7 +144,7 @@ const Hero = () => {
             {/* Manifestation radiant core: light behind the theme title, edges feathered away. */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-[58%] -z-10 aspect-square w-[130%] max-w-[44rem] -translate-x-1/2 -translate-y-1/2 sm:w-[95%] lg:left-[58%] lg:w-[80%]"
+              className="glow-bloom pointer-events-none absolute left-1/2 top-[58%] -z-10 aspect-square w-[130%] max-w-[44rem] -translate-x-1/2 -translate-y-1/2 sm:w-[95%] lg:left-[58%] lg:w-[80%]"
             >
               <img
                 src={manifestArt}
