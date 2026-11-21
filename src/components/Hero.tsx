@@ -8,6 +8,7 @@ import stageScene from "@/assets/hero_scene_stage.webp";
 import prayerScene from "@/assets/hero_scene_prayer.webp";
 import prayerCrowdScene from "@/assets/hero_scene_prayer_crowd.webp";
 import ministerScene from "@/assets/hero_scene_minister.webp";
+import manifestArt from "@/assets/manifestation.webp";
 
 const heroSlides = [
   { src: heroWorship, alt: "A worshipper lifted in worship" },
@@ -138,7 +139,23 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="text-left">
+          <div className="relative text-left">
+            {/* Manifestation radiant core: light behind the theme title, edges feathered away. */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-[58%] -z-10 aspect-square w-[130%] max-w-[44rem] -translate-x-1/2 -translate-y-1/2 sm:w-[95%] lg:left-[58%] lg:w-[80%]"
+            >
+              <img
+                src={manifestArt}
+                alt=""
+                decoding="async"
+                className="h-full w-full object-cover opacity-30 mix-blend-screen saturate-[1.15] sm:opacity-40 lg:opacity-50 animate-[pulse_9s_ease-in-out_infinite]"
+                style={{
+                  maskImage: "radial-gradient(circle at 50% 50%, black 0%, rgba(0,0,0,0.6) 28%, transparent 62%)",
+                  WebkitMaskImage: "radial-gradient(circle at 50% 50%, black 0%, rgba(0,0,0,0.6) 28%, transparent 62%)",
+                }}
+              />
+            </div>
             <div className="intro-reveal mb-3 flex items-center gap-4 lg:mb-6" style={{ animationDelay: "0.15s" }}>
               <span className="hidden h-px w-16 bg-gradient-to-r from-transparent to-gold/70 lg:block"></span>
               <p className="text-glow-gold text-[0.65rem] font-heading font-bold uppercase tracking-[0.2em] text-gold sm:text-sm sm:tracking-[0.25em]">
